@@ -22,6 +22,7 @@ import { environment } from 'src/environments/environment';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import * as R from 'remeda';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const navList = R.concat(NAV_LIST, []);
 
