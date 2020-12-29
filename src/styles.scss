@@ -2,6 +2,7 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @import '~@angular/material/theming';
+@import 'variables.scss';
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -9,29 +10,6 @@
 // Be sure that you only ever include this mixin once!
 @include mat-core();
 
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
-$pma-app-primary: mat-palette($mat-indigo);
-$pma-app-accent: mat-palette($mat-pink, A200, A100, A400);
-
-// The warn palette is optional (defaults to red).
-$pma-app-warn: mat-palette($mat-red);
-
-// Create the theme object. A theme consists of configurations for individual
-// theming systems such as "color" or "typography".
-$pma-app-theme: mat-light-theme((
-  color: (
-    primary: $pma-app-primary,
-    accent: $pma-app-accent,
-    warn: $pma-app-warn,
-  )
-));
-
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
-@include angular-material-theme($pma-app-theme);
 
 /* You can add global styles to this file, and also import other style files */
 
@@ -98,7 +76,7 @@ $mat-light-theme-foreground: (
 );
 
 // Dark Theme text
-$light-text: #ffffff;
+
 $light-primary-text: $light-text;
 $light-accent-text: rgba($light-primary-text, 0.7);
 $light-disabled-text: rgba($light-primary-text, 0.5);
@@ -197,10 +175,10 @@ body {
 }
 
 $mat-primary: (
-  main: #000035,
+  main: $primary-color,
   lighter: #b3b3c2,
   darker: #000022,
-  200: #000035, // For slide toggle,
+  200: $primary-color, // For slide toggle,
   contrast : (
     main: $light-primary-text,
     lighter: $dark-primary-text,
