@@ -17,7 +17,7 @@ import { PMA_NAV_LIST } from '../core/tokens/navlist.token';
         [mode]="(isHandset$ | async) ? 'over' : 'side'"
         [opened]="(isHandset$ | async) === false"
       >
-        <mat-toolbar color="primary">Menu</mat-toolbar>
+        <mat-toolbar color="primary" class="menu-toolbar">Menu</mat-toolbar>
         <mat-nav-list>
           <mat-list-item *ngFor="let listItem of navList">
             <a [routerLink]="listItem.link">{{ listItem.label | titlecase }}</a>

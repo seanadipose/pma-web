@@ -12,9 +12,16 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { CoreModule } from './core/core.module';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+
+import { NAV_LIST } from './core/constants/navlist.constant';
+import { AngularFireModule } from '@angular/fire';
+
+import { environment } from 'src/environments/environment';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import * as R from 'remeda';
-import { NAV_LIST } from './core/constants/navlist.constant';
 
 const navList = R.concat(NAV_LIST, []);
 
@@ -31,6 +38,10 @@ const navList = R.concat(NAV_LIST, []);
     MatSidenavModule,
     MatIconModule,
     MatListModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
+    FlexLayoutModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
