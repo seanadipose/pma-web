@@ -7,7 +7,7 @@ import { PmaInputComponent } from '../pma-input/pma-input.component';
   template: `
     <mat-form-field [formGroup]="form.control" [appearance]="appearance" fxFlexFill>
       <mat-label> {{ label }} </mat-label>
-      <input matInput #inputField="matInput" [formControlName]="name" type="text" />
+      <input matInput #inputField="matInput" [formControlName]="name" type="text" (click)="this.getLocation()" />
       <button mat-button matSuffix mat-icon-button (click)="this.getLocation()">
         <mat-icon>{{ this.control.value ? 'close' : 'my_location' }}</mat-icon>
       </button>
