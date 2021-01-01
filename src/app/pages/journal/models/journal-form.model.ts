@@ -1,9 +1,11 @@
+import { Injectable } from '@angular/core';
 import { maxDate, maxLength, minLength, prop, required } from '@rxweb/reactive-form-validators';
 import { Journal } from 'src/app/core/models/journal.model';
 import { BaseForm } from 'src/app/modules/forms/models/base-form.model';
 
 export interface JournalForm extends Journal {}
 
+@Injectable({ providedIn: 'any' })
 export class JournalForm extends BaseForm {
   @required(BaseForm.requiredErrorMessage('location'))
   location: string;
@@ -13,14 +15,15 @@ export class JournalForm extends BaseForm {
   @maxLength({ value: 300 })
   title: string;
 
-  @required()
+  // @required()
+  @prop()
   emotions: string[];
 
   @prop()
   geoloc: string;
 
-  @required()
-  geloc: string;
+  @prop()
+  description: string;
 
   @required()
   @maxDate({ value: BaseForm.tomorrow })

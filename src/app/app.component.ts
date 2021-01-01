@@ -9,7 +9,6 @@ import { AuthService } from './core/services/auth.service';
     <pma-navigation>
       <router-outlet></router-outlet>
     </pma-navigation>
-    <router-outlet name="login-route"></router-outlet>
   `,
   styleUrls: ['./app.component.scss'],
 })

@@ -1,19 +1,36 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { IFormGroup } from '@rxweb/reactive-form-validators';
+import { JournalForm } from '../../models/journal-form.model';
 
 @Component({
   selector: 'pma-journal-form',
   template: `
-    <p>
-      journal-form works!
-    </p>
+    <form #userForm="ngForm" [formGroup]="fg" fxLayout="column">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>{{ isNew ? 'Create Journal' : 'Update Journal' }}</mat-card-title>
+          <mat-card-subtitle></mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-list>
+            <pma-date-input mat-list-item name="dateTime" label="dateTime"></pma-date-input>
+            <pma-input mat-list-item name="geoloc" label="geoloc"></pma-input>
+            <pma-input mat-list-item name="location" label="location"></pma-input>
+            <pma-input mat-list-item name="title" label="title"></pma-input>
+
+            <pma-input mat-list-item name="description" label="description"></pma-input>
+          </mat-list>
+        </mat-card-content>
+      </mat-card>
+    </form>
   `,
-  styleUrls: ['./journal-form.component.scss']
+  styleUrls: ['./journal-form.component.scss'],
 })
 export class JournalFormComponent implements OnInit {
+  @Input() isNew = false;
+  @Input() fg: IFormGroup<JournalForm>;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

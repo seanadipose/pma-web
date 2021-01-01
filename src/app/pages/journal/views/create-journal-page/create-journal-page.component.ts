@@ -4,12 +4,11 @@ import { PmaFormsService } from 'src/app/modules/forms/services/pma-forms.servic
 import { JournalForm } from '../../models/journal-form.model';
 
 @Component({
-  selector: 'pma-journal-page',
-  template: ` <pma-journal-form [fg]="journalForm"></pma-journal-form> `,
-  styleUrls: ['./journal-page.component.scss'],
-  providers: [JournalForm],
+  selector: 'pma-create-journal-page',
+  template: ` <pma-create-journal-form [fg]="journalForm"></pma-create-journal-form> `,
+  styleUrls: ['./create-journal-page.component.scss'],
 })
-export class JournalPageComponent implements OnInit {
+export class CreateJournalPageComponent implements OnInit {
   journalForm: IFormGroup<JournalForm>;
   constructor(public formSvc: PmaFormsService, private jf: JournalForm) {
     this.journalForm = this.formSvc.makeForm(this.jf);

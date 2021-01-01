@@ -9,7 +9,7 @@ import { AuthService } from '../core/services/auth.service';
 @Component({
   selector: 'pma-navigation',
   template: `
-    <ng-container *ngIf="authSvc.user$ | async as user; else noUser">
+    <ng-container *ngIf="authSvc.user$ | async as user">
       <mat-sidenav-container class="sidenav-container">
         <mat-sidenav
           #drawer
@@ -48,7 +48,6 @@ import { AuthService } from '../core/services/auth.service';
               <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
             </button>
             <span>Progressive Mental Alignment</span>
-            <div class="toolbar-spacer"></div>
             <button
               *ngIf="user"
               mat-icon-button
@@ -66,7 +65,7 @@ import { AuthService } from '../core/services/auth.service';
       <mat-menu #menu="matMenu">
         <button mat-menu-item>
           <mat-icon>dialpad</mat-icon>
-          <span>Redial</span>
+          <span>New</span>
         </button>
         <button mat-menu-item disabled>
           <mat-icon>voicemail</mat-icon>
@@ -78,9 +77,6 @@ import { AuthService } from '../core/services/auth.service';
         </button>
       </mat-menu>
     </ng-container>
-    <ng-template #noUser>
-      <router-outlet></router-outlet>
-    </ng-template>
   `,
   styleUrls: ['./navigation.component.scss'],
 })

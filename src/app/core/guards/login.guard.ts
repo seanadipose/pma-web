@@ -21,7 +21,7 @@ export class LoginGuard implements CanActivate {
     console.log(state);
     return this.authSvc.checkUser().pipe(
       switchMap((res) => {
-        return of(res !== null ? true : this.router.createUrlTree(['']));
+        return of(res !== null ? true : this.router.createUrlTree(['login']));
       })
     );
   }
