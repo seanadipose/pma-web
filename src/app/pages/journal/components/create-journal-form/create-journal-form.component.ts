@@ -1,5 +1,6 @@
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import { Component, OnInit } from '@angular/core';
+import { Component, InjectionToken, OnInit } from '@angular/core';
+import { MatChipsDefaultOptions } from '@angular/material/chips';
 import { Observable } from 'rxjs';
 import { JournalForm } from '../../models/journal-form.model';
 import { JournalCollectionService } from '../../services/journal-collection.service';
@@ -8,7 +9,7 @@ import { JournalFormComponent } from '../journal-form/journal-form.component';
 @Component({
   selector: 'pma-create-journal-form',
   template: `
-    <mat-horizontal-stepper #stepper>
+    <mat-horizontal-stepper #stepper (selectionChange)="onChange($event)" [selectedIndex]="selectedIndex">
       <form [formGroup]="fg">
         <mat-step [hasError]="stepOneValid" errorMessage="must fill out all fields">
           <ng-template matStepLabel>When and where</ng-template>
@@ -20,6 +21,7 @@ import { JournalFormComponent } from '../journal-form/journal-form.component';
             <pma-location-input name="geoloc" label="location" fxFlexFill></pma-location-input>
             <pma-select-input name="place" label="Place" fxFlexFill [options]="placeOptions | async"></pma-select-input>
           </div>
+          <button mat-button matStepperNext [disabled]="!stepOneValid">Next</button>
         </mat-step>
         <mat-step [hasError]="stepTwoValid">
           <ng-template matStepLabel>What happened</ng-template>
@@ -28,9 +30,56 @@ import { JournalFormComponent } from '../journal-form/journal-form.component';
 
             <pma-textbox-input name="description" label="description" fxFlexFill></pma-textbox-input>
           </div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext [disabled]="!stepTwoValid">Next</button>
         </mat-step>
         <mat-step>
           <ng-template matStepLabel>How you feel</ng-template>
+          <!-- <mat-form-field> -->
+
+          <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="30px" class="step-container">
+            <mat-label>How's your mood?</mat-label>
+            <mat-slider
+              step="1"
+              tickInterval="1"
+              max="5"
+              formControlName="rating"
+              [thumbLabel]="true"
+              defaultTabIndex="3"
+              #slide="matSlider"
+            ></mat-slider>
+            <span style="margin-bottom: 20px;">{{ fg.get('rating').value }}</span>
+            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15px">
+              <ng-container *ngFor="let item of getArray(slide.value)">
+                <mat-icon color="accent">star_rate</mat-icon>
+              </ng-container>
+            </div>
+            <pma-autocomplete-input
+              name="emotions"
+              label="How are you feeling?"
+              style="margin-top: 15px;"
+              [options]="emotionOptions | async"
+              #emotionCloud="autoInput"
+            ></pma-autocomplete-input>
+            <mat-chip-list #chipList aria-label="Fruit selection">
+              <mat-chip
+                *ngFor="let option of emotionCloud.selectedOptions; index as i"
+                [selectable]="false"
+                [removable]="true"
+                (removed)="emotionCloud.removeSelection(i)"
+                defaultColor="accent"
+                color="primary"
+              >
+                {{ option }}
+                <mat-icon matChipRemove color="primary">cancel</mat-icon>
+              </mat-chip>
+            </mat-chip-list>
+          </div>
+
+          <!-- </mat-form-field> -->
+
+          <button mat-raised-button matStepperPrevious>Back</button>
+          <button mat-raised-button matStepperNext [disabled]="fg.invalid" color="primary">Submit</button>
         </mat-step>
       </form>
     </mat-horizontal-stepper>
@@ -44,25 +93,32 @@ import { JournalFormComponent } from '../journal-form/journal-form.component';
   ],
 })
 export class CreateJournalFormComponent extends JournalFormComponent implements OnInit {
+  selectedIndex = 2;
+  emotionOptions: Observable<string[]>;
+  placeOptions: Observable<string[]>;
+  getArray(num: number) {
+    return new Array(Math.round(num));
+  }
+
   get stepOneValid() {
     const { dateTime, time, place } = this.fg.controls;
 
     const check = [dateTime, time, place].map((ctrl) => ctrl.valid).some((ctrlValid) => ctrlValid === false);
-    console.log(check);
-    console.log(this.fg);
+
     return check;
   }
 
   get stepTwoValid() {
+    if (this.selectedIndex === 0) return false;
     const { description, title } = this.fg.controls;
 
     return [description, title].map((ctrl) => ctrl.valid).some((ctrlValid) => ctrlValid === false);
   }
 
   get stepThreeValid() {
-    return true;
+    return this.fg.valid;
   }
-  placeOptions: Observable<string[]>;
+
   constructor(public journalSvc: JournalCollectionService) {
     super();
   }
@@ -70,5 +126,11 @@ export class CreateJournalFormComponent extends JournalFormComponent implements 
   ngOnInit(): void {
     this.fg.valueChanges.subscribe((obs) => console.log(this.fg.controls));
     this.placeOptions = this.journalSvc.getPlaces();
+    this.emotionOptions = this.journalSvc.getEmtions();
+  }
+
+  onChange(evt: any) {
+    const { selectedIndex = 0 } = evt;
+    this.selectedIndex = selectedIndex;
   }
 }

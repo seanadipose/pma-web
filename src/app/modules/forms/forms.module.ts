@@ -5,6 +5,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { clone } from 'remeda';
 import { VALIDATION_MESSAGES } from 'src/app/core/constants/validation-messages.constant';
@@ -21,11 +23,21 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { SelectInputComponent } from './components/select-input/select-input.component';
 import { MatSelectModule } from '@angular/material/select';
+import { AutocompleteInputComponent } from './components/autocomplete-input/autocomplete-input.component';
 
-const MAT_MODULES = [MatFormFieldModule, MatInputModule, MatDatepickerModule, MatStepperModule, MatSelectModule];
+const MAT_MODULES = [
+  MatFormFieldModule,
+  MatInputModule,
+  MatDatepickerModule,
+  MatStepperModule,
+  MatStepperModule,
+  MatSelectModule,
+  MatSliderModule,
+  MatAutocompleteModule,
+];
 const validations = clone(VALIDATION_MESSAGES);
 
-const components = [PmaInputComponent];
+const components = [PmaInputComponent, AutocompleteInputComponent];
 
 @NgModule({
   declarations: [

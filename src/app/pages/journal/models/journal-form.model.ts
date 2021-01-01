@@ -35,5 +35,5 @@ export class JournalForm extends BaseForm {
   time = now;
 
   @required()
-  rating: number;
+  rating: number = 5;
 }
