@@ -3,12 +3,14 @@ import { maxDate, maxLength, minLength, prop, required } from '@rxweb/reactive-f
 import { Journal } from 'src/app/core/models/journal.model';
 import { BaseForm } from 'src/app/modules/forms/models/base-form.model';
 
+const date = new Date();
+const now = `${date.getHours()}:${date.getMinutes}`;
 export interface JournalForm extends Journal {}
 
 @Injectable({ providedIn: 'any' })
 export class JournalForm extends BaseForm {
   @required(BaseForm.requiredErrorMessage('location'))
-  location: string;
+  place: string;
 
   @required(BaseForm.requiredErrorMessage('title'))
   @minLength({ value: 5 })
@@ -25,9 +27,12 @@ export class JournalForm extends BaseForm {
   @prop()
   description: string;
 
-  @required()
-  @maxDate({ value: BaseForm.tomorrow })
-  dateTime: Date;
+  @required(BaseForm.requiredErrorMessage('Date'))
+  // @maxDate({ value: new Date() })
+  dateTime: Date = new Date();
+
+  @prop()
+  time = now;
 
   @required()
   rating: number;

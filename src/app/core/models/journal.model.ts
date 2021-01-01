@@ -2,10 +2,11 @@ export interface Journal {
   title: string;
   description?: string;
   emotions: string[];
-  location: string;
+  place: string;
   geoloc: string;
   dateTime: Date;
   rating: number;
+  time: any;
 }
 
 export class Journal {

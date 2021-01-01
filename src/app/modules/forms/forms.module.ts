@@ -19,8 +19,10 @@ import { PmaTextboxInputComponent } from './components/pma-textbox-input/pma-tex
 import { LocationInputComponent } from './components/location-input/location-input.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { SelectInputComponent } from './components/select-input/select-input.component';
+import { MatSelectModule } from '@angular/material/select';
 
-const MAT_MODULES = [MatFormFieldModule, MatInputModule, MatDatepickerModule, MatStepperModule];
+const MAT_MODULES = [MatFormFieldModule, MatInputModule, MatDatepickerModule, MatStepperModule, MatSelectModule];
 const validations = clone(VALIDATION_MESSAGES);
 
 const components = [PmaInputComponent];
@@ -32,6 +34,7 @@ const components = [PmaInputComponent];
     DateInputComponent,
     PmaTextboxInputComponent,
     LocationInputComponent,
+    SelectInputComponent,
   ],
   imports: [
     CommonModule,
@@ -51,6 +54,7 @@ const components = [PmaInputComponent];
     DateInputComponent,
     PmaTextboxInputComponent,
     LocationInputComponent,
+    SelectInputComponent,
   ],
   providers: [{ provide: PMA_VALIDATION_MESSAGES, useValue: validations }, PmaFormsService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

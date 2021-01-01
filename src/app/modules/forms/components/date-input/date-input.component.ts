@@ -3,6 +3,8 @@ import { ControlContainer } from '@angular/forms';
 import { dateBuilder } from 'src/app/core/functions/dates.function';
 import { PmaInputComponent } from '../pma-input/pma-input.component';
 
+const dates = dateBuilder();
+
 @Component({
   selector: 'pma-date-input',
   template: `
@@ -17,10 +19,13 @@ import { PmaInputComponent } from '../pma-input/pma-input.component';
   styleUrls: ['./date-input.component.scss'],
 })
 export class DateInputComponent extends PmaInputComponent implements OnInit {
-  maxDate = new Date(dateBuilder()[0], dateBuilder[1], dateBuilder()[2]);
+  maxDate = new Date();
   constructor(@Optional() @Host() public form: ControlContainer) {
     super(form);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.maxDate);
+    this.form.valueChanges.subscribe((obs) => console.log(this.form.control.get(this.name)));
+  }
 }

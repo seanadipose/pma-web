@@ -15,7 +15,7 @@ import { JournalForm } from '../../models/journal-form.model';
           <mat-list>
             <pma-date-input mat-list-item name="dateTime" label="dateTime"></pma-date-input>
             <pma-input mat-list-item name="geoloc" label="geoloc"></pma-input>
-            <pma-input mat-list-item name="location" label="location"></pma-input>
+            <pma-input mat-list-item name="place" label="location"></pma-input>
             <pma-input mat-list-item name="title" label="title"></pma-input>
 
             <pma-input mat-list-item name="description" label="description"></pma-input>

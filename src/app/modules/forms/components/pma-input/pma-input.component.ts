@@ -8,7 +8,7 @@ import { humanizePipe } from 'src/app/core/functions/humanize.function';
   template: `
     <mat-form-field [formGroup]="form.control" [appearance]="appearance" fxFlexFill>
       <mat-label> {{ label }} </mat-label>
-      <input matInput #inputField="matInput" [formControlName]="name" type="text" />
+      <input matInput #inputField="matInput" [formControlName]="name" [type]="type" />
       <mat-error>{{ form.control.get(name)['errorMessage'] }}</mat-error>
     </mat-form-field>
   `,
@@ -16,8 +16,8 @@ import { humanizePipe } from 'src/app/core/functions/humanize.function';
   exportAs: 'pmaInput',
 })
 export class PmaInputComponent implements OnInit {
-  // @View
-  // form: FormGroup;
+  @Input() type: 'time' | 'text' = 'text';
+
   @Input() name: string;
   label: string;
   @Input('label') set _label(label: string) {
@@ -31,8 +31,5 @@ export class PmaInputComponent implements OnInit {
   @Input() appearance: MatFormFieldAppearance = 'outline';
   ctrl: AbstractControl;
   constructor(@Optional() @Host() public form: ControlContainer) {}
-  ngOnInit() {
-    console.log(this);
-    // this.ctrl = this.form;
-  }
+  ngOnInit() {}
 }
