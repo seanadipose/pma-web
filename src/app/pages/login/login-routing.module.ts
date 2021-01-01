@@ -5,7 +5,7 @@ import { LoginPageComponent } from './views/login/login-page.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'login',
     component: LoginComponent,
     children: [
       {

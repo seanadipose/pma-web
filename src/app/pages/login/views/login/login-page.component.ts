@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { RxFormBuilder } from '@rxweb/reactive-form-validators';
+import { Router } from '@angular/router';
+import { FormBuilderConfiguration, IFormGroup, RxFormBuilder, RxFormGroup } from '@rxweb/reactive-form-validators';
+import { take } from 'rxjs/operators';
+import { LogLevels } from 'src/app/core/enums/enums/log-levels.enum';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { ErrorService } from 'src/app/core/services/error.service';
+import { PmaFormsService } from 'src/app/modules/forms/services/pma-forms.service';
 import { LoginForm } from 'src/app/modules/user/models/login-form.model';
 
 @Component({
@@ -12,33 +18,78 @@ import { LoginForm } from 'src/app/modules/user/models/login-form.model';
           <mat-card-title> Login to PMA</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <form [formGroup]="fg" fxLayout="column">
-            <mat-form-field appearance="outline">
-              <mat-label> Email </mat-label>
-              <input matInput formControlName="username" />
-              <mat-error></mat-error>
-            </mat-form-field>
-            <mat-form-field appearance="outline">
-              <mat-label>Password </mat-label>
-              <input matInput formControlName="password" type="password" />
-            </mat-form-field>
-            <mat-error></mat-error>
+          <form #loginForm="ngForm" [formGroup]="fg" fxLayout="column">
+            <pma-input #user="pmaInput" appearance="outline" name="username" fxFlex="100" fxFlexFill label="username">
+            </pma-input>
+            <pma-password-input
+              #pw="pmaPassword"
+              appearance="outline"
+              name="password"
+              fxFlex="100"
+              fxFlexFill
+              label="password"
+              (keyup.enter)="login(user.value, pw.value)"
+            >
+            </pma-password-input>
           </form>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-button [disabled]="fg.invalid">Login</button>
+          <button mat-button [disabled]="fg.invalid" (click)="login(user.value, pw.value)">Login</button>
           <button mat-button color="accent">Register</button>
         </mat-card-actions>
+        <mat-footer>
+          <ng-container
+            ><mat-error *ngIf="errorState">{{ errorState }}</mat-error></ng-container
+          >
+        </mat-footer>
       </mat-card>
     </div>
   `,
   styleUrls: ['./login-page.component.scss'],
 })
 export class LoginPageComponent implements OnInit {
-  fg: FormGroup;
-  constructor(fb: RxFormBuilder, loginForm: LoginForm) {
-    this.fg = fb.formGroup(loginForm);
+  fg: IFormGroup<LoginForm>;
+  errorState: string;
+  constructor(
+    fb: RxFormBuilder,
+    loginForm: LoginForm,
+    private authSvc: AuthService,
+    private errorSvc: ErrorService,
+    private router: Router,
+    private formsSvc: PmaFormsService
+  ) {
+    this.fg = fb.formGroup(loginForm) as IFormGroup<LoginForm>;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // if (this.authSvc.isAuth) this.router.navigate(['home']);
+    // this.authSvc.checkUser().subscribe((obs) => console.log(obs));
+    this.authSvc.user$.subscribe((res) => {
+      console.log(
+        '🚀 -----------------------------------------------------------------------------------------------------------'
+      );
+      console.log(
+        '🚀 ~ file: login-page.component.ts ~ line 68 ~ LoginPageComponent ~ this.authSvc.user$.subscribe ~ res',
+        res
+      );
+      console.log(
+        '🚀 -----------------------------------------------------------------------------------------------------------'
+      );
+      const isAuth = !!res;
+
+      // if (isAuth) return this.router.navigate(['home']);
+    });
+  }
+
+  async login(user: string, pw: string) {
+    try {
+      await this.authSvc.login(user, pw).toPromise();
+    } catch (err) {
+      const errorRef = this.errorSvc.log(LogLevels.WARN, { message: err.message });
+      errorRef.pipe(take(1)).subscribe((res) => (this.errorState = null));
+      this.fg.get('password').reset();
+
+      this.errorState = err.message;
+    }
+  }
 }

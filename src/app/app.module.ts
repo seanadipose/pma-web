@@ -20,9 +20,9 @@ import { AngularFireModule } from '@angular/fire';
 
 import { environment } from 'src/environments/environment';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatMenuModule } from '@angular/material/menu';
 
 import * as R from 'remeda';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const navList = R.concat(NAV_LIST, []);
 
@@ -43,6 +43,7 @@ const navList = R.concat(NAV_LIST, []);
     AngularFirestoreModule,
     AngularFireAuthModule,
     FlexLayoutModule,
+    MatMenuModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
