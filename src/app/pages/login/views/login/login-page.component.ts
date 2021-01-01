@@ -62,19 +62,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // if (this.authSvc.isAuth) this.router.navigate(['home']);
-    // this.authSvc.checkUser().subscribe((obs) => console.log(obs));
     this.authSvc.user$.subscribe((res) => {
-      console.log(
-        '🚀 -----------------------------------------------------------------------------------------------------------'
-      );
-      console.log(
-        '🚀 ~ file: login-page.component.ts ~ line 68 ~ LoginPageComponent ~ this.authSvc.user$.subscribe ~ res',
-        res
-      );
-      console.log(
-        '🚀 -----------------------------------------------------------------------------------------------------------'
-      );
       const isAuth = !!res;
 
       // if (isAuth) return this.router.navigate(['home']);

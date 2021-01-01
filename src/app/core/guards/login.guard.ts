@@ -18,9 +18,10 @@ export class LoginGuard implements CanActivate {
     private router: Router
   ) {}
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
+    console.log(state);
     return this.authSvc.checkUser().pipe(
       switchMap((res) => {
-        return of(res !== null ? this.router.createUrlTree([state.url]) : this.router.createUrlTree(['']));
+        return of(res !== null ? true : this.router.createUrlTree(['']));
       })
     );
   }

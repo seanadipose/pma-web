@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { BehaviorSubject, from } from 'rxjs';
+import { BehaviorSubject, from, of } from 'rxjs';
 import firebase from 'firebase/app';
-import { filter, share } from 'rxjs/operators';
+import { filter, map, share, switchMap, tap } from 'rxjs/operators';
+import { UserForm } from 'src/app/modules/user/models/user-form.model';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +23,28 @@ export class AuthService {
     return !!this._user;
   }
 
-  currentUser() {
+  async updateUser(details: UserForm) {
+    const { displayName, phoneNumber, photoURL } = details;
+    const userObs = await this.currentUser.toPromise();
+    console.log('🚀 ----------------------------------------------------------------------------------');
+    console.log('🚀 ~ file: auth.service.ts ~ line 28 ~ AuthService ~ updateUser ~ userObs', userObs);
+    console.log('🚀 ----------------------------------------------------------------------------------');
+
+    userObs;
+    // this.afAuth.updateCurrentUser({ ...userObs, providerData: [details] });
+    // const newUser = {...user, ...details}
+    // this.afAuth.;
+    new Promise((resolve, reject) =>
+      userObs
+        .updateProfile({ displayName, photoURL })
+        .then(function () {
+          resolve('update finished');
+        })
+        .catch((err) => reject(err))
+    );
+  }
+
+  get currentUser() {
     return from(this.afAuth.currentUser);
   }
 

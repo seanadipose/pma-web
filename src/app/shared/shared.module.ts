@@ -5,8 +5,18 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 
-const MAT_MODULES = [FlexLayoutModule, MatCardModule, MatButtonModule, MatToolbarModule, MatSnackBarModule];
+const MAT_MODULES = [
+  FlexLayoutModule,
+  MatCardModule,
+  MatButtonModule,
+  MatToolbarModule,
+  MatSnackBarModule,
+  MatIconModule,
+  MatListModule,
+];
 
 @NgModule({
   declarations: [],

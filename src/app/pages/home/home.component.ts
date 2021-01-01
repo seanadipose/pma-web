@@ -3,11 +3,11 @@ import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'pma-home',
-  template: ``,
+  template: ` <router-outlet></router-outlet> `,
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  constructor(private authSvc: AuthService) {}
+  constructor() {}
 
   ngOnInit(): void {}
 }

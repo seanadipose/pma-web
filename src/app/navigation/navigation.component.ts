@@ -48,6 +48,7 @@ import { AuthService } from '../core/services/auth.service';
               <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
             </button>
             <span>Progressive Mental Alignment</span>
+            <div class="toolbar-spacer"></div>
             <button
               *ngIf="user"
               mat-icon-button
