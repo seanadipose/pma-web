@@ -11,8 +11,8 @@ import { JournalFormComponent } from '../journal-form/journal-form.component';
           <ng-template matStepLabel>When and where</ng-template>
           <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="10px" class="step-container">
             <pma-date-input name="dateTime" label="dateTime" fxFlexFill></pma-date-input>
-            <pma-input name="geoloc" label="geoloc" fxFlexFill></pma-input>
-            <pma-input name="location" label="location" fxFlexFill></pma-input>
+            <pma-location-input name="geoloc" label="location" fxFlexFill></pma-location-input>
+            <pma-input name="location" label="Place" fxFlexFill></pma-input>
           </div>
         </mat-step>
         <mat-step>

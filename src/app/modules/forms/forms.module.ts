@@ -16,6 +16,9 @@ import { DateInputComponent } from './components/date-input/date-input.component
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { PmaTextboxInputComponent } from './components/pma-textbox-input/pma-textbox-input.component';
+import { LocationInputComponent } from './components/location-input/location-input.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 const MAT_MODULES = [MatFormFieldModule, MatInputModule, MatDatepickerModule, MatStepperModule];
 const validations = clone(VALIDATION_MESSAGES);
@@ -23,8 +26,22 @@ const validations = clone(VALIDATION_MESSAGES);
 const components = [PmaInputComponent];
 
 @NgModule({
-  declarations: [...components, PasswordInputComponent, DateInputComponent, PmaTextboxInputComponent],
-  imports: [CommonModule, MatNativeDateModule, ReactiveFormsModule, RxReactiveFormsModule, ...MAT_MODULES],
+  declarations: [
+    ...components,
+    PasswordInputComponent,
+    DateInputComponent,
+    PmaTextboxInputComponent,
+    LocationInputComponent,
+  ],
+  imports: [
+    CommonModule,
+    MatNativeDateModule,
+    ReactiveFormsModule,
+    RxReactiveFormsModule,
+    ...MAT_MODULES,
+    MatIconModule,
+    MatButtonModule,
+  ],
   exports: [
     ReactiveFormsModule,
     RxReactiveFormsModule,
@@ -33,6 +50,7 @@ const components = [PmaInputComponent];
     PasswordInputComponent,
     DateInputComponent,
     PmaTextboxInputComponent,
+    LocationInputComponent,
   ],
   providers: [{ provide: PMA_VALIDATION_MESSAGES, useValue: validations }, PmaFormsService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
