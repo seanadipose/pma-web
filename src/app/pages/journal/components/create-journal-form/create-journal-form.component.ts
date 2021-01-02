@@ -1,9 +1,11 @@
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import { Component, InjectionToken, OnInit } from '@angular/core';
+import { Component, EventEmitter, InjectionToken, OnInit, Output } from '@angular/core';
 import { MatChipsDefaultOptions } from '@angular/material/chips';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Journal } from 'src/app/core/models/journal.model';
 import { LoadingService } from 'src/app/core/services/loading.service';
+import { StateService } from 'src/app/core/services/state-service';
 import { JournalCollectionService } from 'src/app/modules/collections/services/journal-collections.service';
 import { JournalForm } from '../../models/journal-form.model';
 import { JournalFormComponent } from '../journal-form/journal-form.component';
@@ -25,6 +27,7 @@ import { JournalFormComponent } from '../journal-form/journal-form.component';
               formControlName="rating"
               [thumbLabel]="true"
               defaultTabIndex="3"
+              startAt="3"
               #slide="matSlider"
             ></mat-slider>
             <span style="margin-bottom: 20px;">{{ fg.get('rating').value }}</span>
@@ -95,8 +98,7 @@ import { JournalFormComponent } from '../journal-form/journal-form.component';
               mat-raised-button
               matStepperNext
               color="primary"
-              [disabled]="fg.invalid"
-              (click)="submit(fg.getRawValue(), emotionCloud.selectedOptions)"
+              (click)="submit(fg.getRawValue(), emotionCloud.selectedOptions, slide.value)"
             >
               Submit
             </button>
@@ -117,6 +119,8 @@ export class CreateJournalFormComponent extends JournalFormComponent implements 
   selectedIndex = 0;
   emotionOptions: Observable<string[]>;
   placeOptions: Observable<string[]>;
+  @Output() onSubmit = new EventEmitter<any>();
+
   getArray(num: number) {
     return new Array(Math.round(num));
   }
@@ -141,7 +145,13 @@ export class CreateJournalFormComponent extends JournalFormComponent implements 
     return this.fg.valid;
   }
 
-  constructor(public journalSvc: JournalCollectionService, private loadingSvc: LoadingService) {
+  constructor(
+    public journalSvc: JournalCollectionService,
+    private stateSvc: StateService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private loadingSvc: LoadingService
+  ) {
     super();
   }
 
@@ -156,21 +166,14 @@ export class CreateJournalFormComponent extends JournalFormComponent implements 
     this.selectedIndex = selectedIndex;
   }
 
-  async submit(data: JournalForm, emotions: string[]) {
-    const journal = new Journal({ ...data, emotionsList: emotions }).value;
+  async submit(data: JournalForm, emotions: string[], rating: number = 3) {
+    const journal = new Journal({ ...data, rating, emotionsList: emotions }).value;
+    console.log('run');
     try {
-      const res = await this.journalSvc.create(journal);
-      console.log(
-        '🚀 -------------------------------------------------------------------------------------------------------'
-      );
-      console.log(
-        '🚀 ~ file: create-journal-form.component.ts ~ line 163 ~ CreateJournalFormComponent ~ submit ~ res',
-        res
-      );
-      console.log(
-        '🚀 -------------------------------------------------------------------------------------------------------'
-      );
+      const res = await this.journalSvc.create(this.stateSvc.userId, journal);
+
       this.loadingSvc.responseSnackBar();
+      this.router.navigate([`journals/${res.id}`]);
     } catch (err) {
       this.loadingSvc.responseSnackBar(false);
       console.log(err);

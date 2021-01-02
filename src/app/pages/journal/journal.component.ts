@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { JournalCollectionService } from 'src/app/modules/collections/services/journal-collections.service';
-
+// "Q6XV6zAOwFCR1IdvX31n"
 @Component({
   selector: 'pma-journal',
   template: `
@@ -36,9 +36,9 @@ export class JournalComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('started');
-    this.items = this.journalSvc.getValueChanges();
-    this.items.subscribe((obs) => console.log(obs));
+    // this.items = this.journalSvc.getValueChanges();
+    // this.items.subscribe((obs) => console.log(obs));
 
-    const items = this.journalSvc.getCollection().subscribe((res) => console.log(res));
+    // const items = this.journalSvc.getCollection().subscribe((res) => console.log(res));
   }
 }

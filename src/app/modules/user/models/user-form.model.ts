@@ -22,3 +22,11 @@ export class UserForm extends BaseForm {
   @prop()
   providerId: string;
 }
+
+export class User extends UserForm {
+  email: string;
+  displayName: string;
+  phoneNumber: string;
+  photoURL: string;
+  providerId: string;
+}

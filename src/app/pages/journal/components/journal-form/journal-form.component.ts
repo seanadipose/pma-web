@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IFormGroup } from '@rxweb/reactive-form-validators';
+import { Journal } from 'src/app/core/models/journal.model';
 import { JournalForm } from '../../models/journal-form.model';
 
 @Component({
@@ -29,6 +30,10 @@ import { JournalForm } from '../../models/journal-form.model';
 export class JournalFormComponent implements OnInit {
   @Input() isNew = false;
   @Input() fg: IFormGroup<JournalForm>;
+
+  @Input('journal') set journal(jrnl: Journal) {
+    this.fg.patchModelValue(jrnl);
+  }
 
   constructor() {}
 

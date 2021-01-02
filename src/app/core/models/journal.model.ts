@@ -10,6 +10,8 @@ export interface Journal {
   rating: number;
   time: any;
   emotionsList?: string[];
+  id?: string;
+  userId?: string;
 }
 
 export class Journal {

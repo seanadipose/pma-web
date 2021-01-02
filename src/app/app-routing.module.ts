@@ -10,11 +10,11 @@ const routes: Routes = [
     canActivate: [LoginGuard],
   },
   {
-    path: 'journal',
+    path: 'journals',
     loadChildren: () => import('./pages/journal/journal.module').then((m) => m.JournalModule),
     canActivate: [LoginGuard],
   },
-  { path: '**', redirectTo: '/home' },
+  // { path: '**', redirectTo: '/home' },
 ];
 
 @NgModule({

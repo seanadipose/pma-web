@@ -12,8 +12,8 @@ const routes: Routes = [
     component: JournalComponent,
     children: [
       { path: '', component: JournalsPageComponent },
-      { path: 'new', component: CreateJournalPageComponent },
-      { path: ':/id', component: JournalPageComponent, pathMatch: 'full' },
+      { path: 'new', component: CreateJournalPageComponent, pathMatch: 'full' },
+      { path: ':id', component: JournalPageComponent },
       // { path: ':/id', component: JournalPageComponent },
     ],
   },

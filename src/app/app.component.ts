@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 import { AuthService } from './core/services/auth.service';
 import { LoadingService } from './core/services/loading.service';
+import { StateService } from './core/services/state-service';
 
 @Component({
   selector: 'pma-root',
@@ -17,11 +19,18 @@ import { LoadingService } from './core/services/loading.service';
 })
 export class AppComponent implements OnInit {
   title = 'Progressive Mental Alignment';
-  constructor(private authSvc: AuthService, private router: Router, private loadingSvc: LoadingService) {}
+  constructor(
+    private authSvc: AuthService,
+    private stateSvc: StateService,
+    private router: Router,
+    private loadingSvc: LoadingService
+  ) {}
 
   ngOnInit() {
-    this.authSvc.user$.subscribe((obs) => {
+    this.authSvc.user$.pipe(filter((user) => !!user)).subscribe((obs) => {
       // if (obs) this.router.navigate(['home']);
+
+      this.stateSvc.init(obs);
     });
 
     // this.loadingSvc.start();

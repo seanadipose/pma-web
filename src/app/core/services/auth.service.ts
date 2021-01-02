@@ -26,14 +26,7 @@ export class AuthService {
   async updateUser(details: UserForm) {
     const { displayName, phoneNumber, photoURL } = details;
     const userObs = await this.currentUser.toPromise();
-    console.log('🚀 ----------------------------------------------------------------------------------');
-    console.log('🚀 ~ file: auth.service.ts ~ line 28 ~ AuthService ~ updateUser ~ userObs', userObs);
-    console.log('🚀 ----------------------------------------------------------------------------------');
 
-    userObs;
-    // this.afAuth.updateCurrentUser({ ...userObs, providerData: [details] });
-    // const newUser = {...user, ...details}
-    // this.afAuth.;
     new Promise((resolve, reject) =>
       userObs
         .updateProfile({ displayName, photoURL })
@@ -64,8 +57,9 @@ export class AuthService {
   constructor(private afAuth: AngularFireAuth) {
     this.afAuth.onAuthStateChanged((loginResult) => {
       console.log('auth state changed', loginResult);
+
       const { providerData = null } = loginResult;
-      this.userSub.next(providerData[0]);
+      this.userSub.next({ ...providerData[0] });
     });
   }
 }

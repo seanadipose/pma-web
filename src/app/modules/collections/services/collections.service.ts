@@ -4,6 +4,8 @@ import { Injectable, Inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CollectionsType } from '../types/collections.type';
+
+import firebase from 'firebase/app';
 // import { FirestoreFileTypes } from '../types/firestore-file.types';
 
 @Injectable({
@@ -28,13 +30,14 @@ export abstract class CollectionService<T> {
     );
   }
 
-  insertDoc(document: T[]) {
-    const collection = this.db.collection(this.collection);
-    const promises = document.map((itm) => collection.add(itm));
-    return Promise.all(promises);
+  protected insertDoc(document: T) {
+    const collection = this.db.collection<T>(this.collection);
+    // const promises = document.map((itm) => collection.add(itm));
+    // return Promise.all(promises);
+    return collection.add(document);
   }
 
-  updateDoc(id: string) {
+  private updateDoc(id: string) {
     console.log('not init');
     // console.log(id);
 
@@ -45,13 +48,12 @@ export abstract class CollectionService<T> {
     this.getDoc(id).delete();
   }
 
-  getDoc(id: string) {
-    return this.db.collection(this.collection).doc(id);
+  protected getDoc(id: string) {
+    return this.db.collection<T>(this.collection).doc(id);
   }
 
   getValueChanges() {
     return this.db.collection(this.collection).valueChanges();
   }
-
-  constructor(private db: AngularFirestore) {}
+  constructor(public db: AngularFirestore) {}
 }
