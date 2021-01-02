@@ -16,7 +16,7 @@ export class LoadingService {
   constructor(private spinner: NgxSpinnerService, private _snackBar: MatSnackBar) {}
 
   start() {
-    if (this.spinnerActive) return;
+    if (this.spinnerActive) this.hide();
     this.spinnerActive = true;
     this.spinner.show();
 

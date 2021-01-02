@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { from } from 'rxjs';
-import { filter, switchMap } from 'rxjs/operators';
+import { filter, switchMap, takeWhile } from 'rxjs/operators';
 import { AuthService } from './modules/user/services/auth.service';
 import { LoadingService } from './core/services/loading.service';
 import { StateService } from './core/services/state-service';
@@ -34,11 +34,11 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.authSvc
       .checkUser()
-      .pipe(switchMap((obs) => (obs ? this.stateSvc.init(obs) : null)))
+      .pipe(
+        switchMap((obs) => (obs ? this.stateSvc.init(obs) : null)),
+        takeWhile((val) => !!val)
+      )
       .subscribe((res) => {
-        console.log('🚀 ----------------------------------------------------------------------------');
-        console.log('🚀 ~ file: app.component.ts ~ line 39 ~ AppComponent ~ .subscribe ~ res', res);
-        console.log('🚀 ----------------------------------------------------------------------------');
         console.log('loaded');
         this.stateSvc.setUserId(res ? res : '');
         res ? this.loadingSvc.hide() : this.loadingSvc.start();
