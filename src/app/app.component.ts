@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import { from } from 'rxjs';
+import { filter, switchMap } from 'rxjs/operators';
 import { AuthService } from './core/services/auth.service';
 import { LoadingService } from './core/services/loading.service';
 import { StateService } from './core/services/state-service';
@@ -9,7 +10,7 @@ import { StateService } from './core/services/state-service';
   selector: 'pma-root',
   template: `
     <!--The content below is only a placeholder and can be replaced.-->
-    <pma-navigation>
+    <pma-navigation *ngIf="isReady">
       <router-outlet></router-outlet>
     </pma-navigation>
 
@@ -19,20 +20,26 @@ import { StateService } from './core/services/state-service';
 })
 export class AppComponent implements OnInit {
   title = 'Progressive Mental Alignment';
+  isReady = false;
+
   constructor(
     private authSvc: AuthService,
     private stateSvc: StateService,
     private router: Router,
     private loadingSvc: LoadingService
-  ) {}
+  ) {
+    this.loadingSvc.start();
+  }
 
   ngOnInit() {
-    this.authSvc.user$.pipe(filter((user) => !!user)).subscribe((obs) => {
-      // if (obs) this.router.navigate(['home']);
+    this.authSvc
+      .checkUser()
+      .pipe(switchMap((obs) => from(this.stateSvc.init(obs))))
+      .subscribe((res) => {
+        console.log('loaded');
 
-      this.stateSvc.init(obs);
-    });
-
-    // this.loadingSvc.start();
+        this.isReady = true;
+        this.loadingSvc.hide();
+      });
   }
 }

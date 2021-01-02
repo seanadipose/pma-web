@@ -22,8 +22,14 @@ import { UserForm } from 'src/app/modules/user/models/user-form.model';
         </mat-card-content>
         <mat-card-actions>
           <ng-container>
-            <button mat-button [disabled]="fg.pristine" (click)="fg.reset()">Undo</button>
-            <button mat-button color="accent" [disabled]="fg.pristine" (click)="saveUserForm.emit(fg.value)">
+            <button
+              mat-button
+              [disabled]="fg.pristine"
+              (click)="fg.patchValue(user, { onlySelf: false, emitEvent: true })"
+            >
+              Undo
+            </button>
+            <button mat-raised-button color="accent" [disabled]="fg.pristine" (click)="saveUserForm.emit(fg.value)">
               Save
             </button>
           </ng-container>

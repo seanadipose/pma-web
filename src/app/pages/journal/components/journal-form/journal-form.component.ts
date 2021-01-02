@@ -32,10 +32,13 @@ export class JournalFormComponent implements OnInit {
   @Input() fg: IFormGroup<JournalForm>;
 
   @Input('journal') set journal(jrnl: Journal) {
+    console.log(jrnl);
     this.fg.patchModelValue(jrnl);
   }
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this);
+  }
 }

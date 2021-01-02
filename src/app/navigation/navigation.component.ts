@@ -9,7 +9,7 @@ import { AuthService } from '../core/services/auth.service';
 @Component({
   selector: 'pma-navigation',
   template: `
-    <ng-container *ngIf="authSvc.user$ | async as user">
+    <ng-container>
       <mat-sidenav-container class="sidenav-container">
         <mat-sidenav
           #drawer
@@ -49,12 +49,7 @@ import { AuthService } from '../core/services/auth.service';
             </button>
             <span>Progressive Mental Alignment</span>
             <div class="toolbar-spacer"></div>
-            <button
-              *ngIf="user"
-              mat-icon-button
-              [matMenuTriggerFor]="menu"
-              aria-label="Example icon-button with a menu"
-            >
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
               <mat-icon>face</mat-icon>
             </button>
           </mat-toolbar>

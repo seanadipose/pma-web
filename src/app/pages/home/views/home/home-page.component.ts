@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IFormGroup, RxFormBuilder } from '@rxweb/reactive-form-validators';
-import { take } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { LogLevels } from 'src/app/core/enums/enums/log-levels.enum';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ErrorService } from 'src/app/core/services/error.service';
@@ -13,12 +13,7 @@ import { UserForm } from 'src/app/modules/user/models/user-form.model';
     <mat-card class="main-banner">
       <img mat-card-image src="assets/home-banner.jpg" alt="Photo of a Shiba Inu" class="hl-image" />
     </mat-card>
-    <pma-user-form
-      *ngIf="authSvc.user$ | async as user"
-      [fg]="userFg"
-      [user]="user"
-      (saveUserForm)="updateUser($event)"
-    >
+    <pma-user-form *ngIf="user$ | async as user" [fg]="userFg" [user]="user" (saveUserForm)="updateUser($event)">
       <error-state>{{ errorState }}</error-state>
     </pma-user-form>
   `,
@@ -27,6 +22,7 @@ import { UserForm } from 'src/app/modules/user/models/user-form.model';
 export class HomePageComponent implements OnInit {
   userFg: IFormGroup<UserForm>;
   errorState: any;
+  user$: any;
 
   constructor(
     public userForm: UserForm,
@@ -40,7 +36,7 @@ export class HomePageComponent implements OnInit {
   ngOnInit(): void {
     // const builder = this.formSvc.makeForm(this.userForm);
     // this.userForm = builder(this.authSvc.user);
-    this.authSvc.user;
+    this.user$ = this.authSvc.checkUser().pipe(map((user) => user));
   }
 
   async updateUser(user: UserForm) {

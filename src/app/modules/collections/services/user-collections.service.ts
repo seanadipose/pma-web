@@ -38,6 +38,7 @@ export class UserCollectionService extends CollectionService<UserCollection> {
     from(this.userQuery(user.email)).subscribe((obs) => {
       const docs = obs.docs;
       if (docs.length < 1) {
+        console.log('added user');
         this.addUser(user);
       }
     });

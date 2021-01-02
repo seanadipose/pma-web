@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CollectionReference } from '@angular/fire/firestore';
-import { filter } from 'rxjs/operators';
 import { UserCollection, UserCollectionService } from 'src/app/modules/collections/services/user-collections.service';
 import { User, UserForm } from 'src/app/modules/user/models/user-form.model';
-import { AuthService } from './auth.service';
 
 @Injectable({ providedIn: 'root' })
 export class StateService {

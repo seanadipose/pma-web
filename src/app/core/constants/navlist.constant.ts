@@ -7,7 +7,7 @@ export const NAV_LIST: NavlistItem[] = [
     icon: 'home',
   },
   {
-    label: 'journal',
+    label: 'journals',
     link: 'journal',
     icon: 'book',
   },

@@ -55,11 +55,10 @@ export class AuthService {
   }
 
   constructor(private afAuth: AngularFireAuth) {
-    this.afAuth.onAuthStateChanged((loginResult) => {
-      console.log('auth state changed', loginResult);
-
-      const { providerData = null } = loginResult;
-      this.userSub.next({ ...providerData[0] });
-    });
+    // this.afAuth.onAuthStateChanged((loginResult) => {
+    //   console.log('auth state changed', loginResult);
+    //   const { providerData = null } = loginResult;
+    //   this.userSub.next({ ...providerData[0] });
+    // });
   }
 }

@@ -12,7 +12,7 @@ import firebase from 'firebase/app';
   providedIn: 'root',
 })
 export abstract class CollectionService<T> {
-  collection: CollectionsType;
+  collection: string;
 
   getCollection(): Observable<T[]> {
     const collection = this.db.collection(this.collection);

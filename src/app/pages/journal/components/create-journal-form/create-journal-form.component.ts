@@ -1,5 +1,5 @@
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import { Component, EventEmitter, InjectionToken, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, InjectionToken, Input, OnInit, Output } from '@angular/core';
 import { MatChipsDefaultOptions } from '@angular/material/chips';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -115,7 +115,8 @@ import { JournalFormComponent } from '../journal-form/journal-form.component';
     },
   ],
 })
-export class CreateJournalFormComponent extends JournalFormComponent implements OnInit {
+export class CreateJournalFormComponent implements OnInit {
+  @Input() fg: any;
   selectedIndex = 0;
   emotionOptions: Observable<string[]>;
   placeOptions: Observable<string[]>;
@@ -151,9 +152,7 @@ export class CreateJournalFormComponent extends JournalFormComponent implements 
     private router: Router,
     private route: ActivatedRoute,
     private loadingSvc: LoadingService
-  ) {
-    super();
-  }
+  ) {}
 
   ngOnInit(): void {
     this.fg.valueChanges.subscribe((obs) => console.log(this.fg.controls));

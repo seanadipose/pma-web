@@ -1,14 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { of } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
 import { emotionCloud } from 'src/app/core/constants/emotion-cloud.constant';
 import { Journal } from 'src/app/core/models/journal.model';
-import { AuthService } from 'src/app/core/services/auth.service';
-import { JournalForm } from 'src/app/pages/journal/models/journal-form.model';
-import { COLLECTIONS } from '../types/collections.type';
 import { CollectionService } from './collections.service';
-import { UserCollection, UserCollectionService } from './user-collections.service';
 
 const stubPlaces = ['living room', 'kitchen', 'bedroom', 'mall', 'grocery store'];
 
@@ -18,7 +13,6 @@ const emotions = emotionCloud;
   providedIn: 'root',
 })
 export class JournalCollectionService extends CollectionService<Journal> {
-  private _userId: string;
   getPlaces() {
     return of(stubPlaces);
   }
@@ -38,6 +32,12 @@ export class JournalCollectionService extends CollectionService<Journal> {
     // this._userId = id;
     // });
   }
+
+  list(userId: string) {
+    const ref = this.db.collection<Journal>('users').doc(userId).ref.collection('journals');
+
+    return ref.get();
+  }
   //
   create(userId: string, doc: Journal) {
     console.log(
@@ -49,14 +49,14 @@ export class JournalCollectionService extends CollectionService<Journal> {
     );
     // const id = this._userId ? this._userId : null;
     console.log(userId);
-    return this.db.collection(`users/${userId}/journals`).add(doc);
+    return this.db.collection<Journal>(`users/${userId}/journals`).add(doc);
   }
 
-  list() {
-    // return this.getCollection();
-  }
-
-  getOne(id: string) {
-    return this.getDoc(id).get();
+  getOne(userId: string, docId) {
+    this.db
+      .collection('users')
+      .snapshotChanges()
+      .subscribe((docs) => console.log(docs));
+    return this.db.collection<Journal>(`users`).get();
   }
 }

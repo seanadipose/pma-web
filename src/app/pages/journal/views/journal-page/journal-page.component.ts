@@ -1,32 +1,44 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IFormGroup } from '@rxweb/reactive-form-validators';
+import { IFormGroup, RxFormBuilder } from '@rxweb/reactive-form-validators';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Journal } from 'src/app/core/models/journal.model';
+import { StateService } from 'src/app/core/services/state-service';
 import { JournalCollectionService } from 'src/app/modules/collections/services/journal-collections.service';
 import { PmaFormsService } from 'src/app/modules/forms/services/pma-forms.service';
 import { JournalForm } from '../../models/journal-form.model';
 
 @Component({
   selector: 'pma-journal-page',
-  template: ` <pma-journal-form [journal]="journal$ | async" [fg]="journalForm"></pma-journal-form> `,
+  template: `
+    <pma-journal-form *ngIf="journalForm" [journal]="journal$ | async" [fg]="journalForm"></pma-journal-form>
+  `,
   styleUrls: ['./journal-page.component.scss'],
-  providers: [JournalForm],
+  providers: [{ provide: JournalForm, useClass: JournalForm }],
 })
 export class JournalPageComponent implements OnInit {
-  journalForm: IFormGroup<JournalForm> = this.formSvc.makeForm(this.jf);
-
-  journal$: Observable<Journal>;
+  journalForm: IFormGroup<JournalForm>;
+  journal$: any;
 
   constructor(
     private journalSvc: JournalCollectionService,
-    public formSvc: PmaFormsService,
+    // public formSvc: PmaFormsService,
     private jf: JournalForm,
-    private activatedRoute: ActivatedRoute
-  ) {}
+    private activatedRoute: ActivatedRoute,
+    private stateSvc: StateService,
+    private fb: RxFormBuilder
+  ) {
+    this.journalForm = this.fb.formGroup(this.jf) as IFormGroup<JournalForm>;
+  }
 
   ngOnInit(): void {
-    this.journal$ = this.journalSvc.getOne('Q6XV6zAOwFCR1IdvX31n').pipe(map((res) => res.data()));
+    const { id } = this.activatedRoute.snapshot.params;
+    // this.journal$ =
+
+    this.journalSvc
+      .getOne(this.stateSvc.userId, id)
+      .toPromise()
+      .then((obs) => console.log(obs.metadata));
   }
 }
