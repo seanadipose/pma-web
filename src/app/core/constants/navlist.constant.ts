@@ -8,7 +8,7 @@ export const NAV_LIST: NavlistItem[] = [
   },
   {
     label: 'journals',
-    link: 'journal',
+    link: 'journals',
     icon: 'book',
   },
 ];

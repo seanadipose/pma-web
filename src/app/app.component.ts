@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { from } from 'rxjs';
 import { filter, switchMap } from 'rxjs/operators';
-import { AuthService } from './core/services/auth.service';
+import { AuthService } from './modules/user/services/auth.service';
 import { LoadingService } from './core/services/loading.service';
 import { StateService } from './core/services/state-service';
 

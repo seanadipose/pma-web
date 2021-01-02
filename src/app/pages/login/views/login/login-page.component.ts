@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { FormBuilderConfiguration, IFormGroup, RxFormBuilder, RxFormGroup } from '@rxweb/reactive-form-validators';
 import { take } from 'rxjs/operators';
 import { LogLevels } from 'src/app/core/enums/enums/log-levels.enum';
-import { AuthService } from 'src/app/core/services/auth.service';
+import { AuthService } from 'src/app/modules/user/services/auth.service';
 import { ErrorService } from 'src/app/core/services/error.service';
 import { PmaFormsService } from 'src/app/modules/forms/services/pma-forms.service';
 import { LoginForm } from 'src/app/modules/user/models/login-form.model';

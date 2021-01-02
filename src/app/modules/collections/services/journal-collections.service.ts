@@ -21,8 +21,6 @@ export class JournalCollectionService extends CollectionService<Journal> {
     return of(emotions);
   }
 
-  // collection = COLLECTIONS[0];
-
   constructor(db: AngularFirestore) {
     super(db);
   }
@@ -40,15 +38,6 @@ export class JournalCollectionService extends CollectionService<Journal> {
   }
   //
   create(userId: string, doc: Journal) {
-    console.log(
-      '🚀 --------------------------------------------------------------------------------------------------'
-    );
-    console.log('🚀 ~ file: journal-collections.service.ts ~ line 43 ~ JournalCollectionService ~ create ~ doc', doc);
-    console.log(
-      '🚀 --------------------------------------------------------------------------------------------------'
-    );
-    // const id = this._userId ? this._userId : null;
-    console.log(userId);
     return this.db.collection<Journal>(`users/${userId}/journals`).add(doc);
   }
 

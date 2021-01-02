@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { NavlistItem } from '../core/models/navlist-item.model';
 import { PMA_NAV_LIST } from '../core/tokens/navlist.token';
-import { AuthService } from '../core/services/auth.service';
+import { AuthService } from '../modules/user/services/auth.service';
 
 @Component({
   selector: 'pma-navigation',

@@ -12,6 +12,12 @@ import firebase from 'firebase/app';
   providedIn: 'root',
 })
 export abstract class CollectionService<T> {
+  rootSegment = 'users';
+  childSegments = {
+    journals: 'journals',
+    profile: 'profile',
+  };
+
   collection: string;
 
   getCollection(): Observable<T[]> {
@@ -23,7 +29,6 @@ export abstract class CollectionService<T> {
           const val = snap.payload.doc.data();
           let data = {};
           data = { ...val, id: snap.payload.doc.id } as T;
-          // data.id = snap.payload.doc.id;
           return data as T;
         })
       )

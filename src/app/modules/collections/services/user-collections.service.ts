@@ -3,7 +3,7 @@ import { AngularFirestore, CollectionReference } from '@angular/fire/firestore';
 import { from } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Journal } from 'src/app/core/models/journal.model';
-import { AuthService } from 'src/app/core/services/auth.service';
+import { AuthService } from 'src/app/modules/user/services/auth.service';
 import { User, UserForm } from '../../user/models/user-form.model';
 import { COLLECTIONS } from '../types/collections.type';
 

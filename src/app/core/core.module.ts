@@ -9,12 +9,25 @@ import { ErrorInterceptor } from './interceptors/errors.interceptor';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
 
 import { snackBarConfig } from './tokens/snackbar.token';
+import { AuthService } from '../modules/user/services/auth.service';
+import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from 'src/environments/environment';
+import { UserModule } from '../modules/user/user.module';
 
 const config = snackBarConfig.defaults;
 
 @NgModule({
   declarations: [],
-  imports: [CommonModule, MatSnackBarModule],
+  imports: [
+    CommonModule,
+    MatSnackBarModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
+    UserModule,
+  ],
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() coreModule: CoreModule) {
@@ -31,6 +44,8 @@ export class CoreModule {
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
         { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: config },
+
+        AngularFireAuth,
       ],
     };
   }
