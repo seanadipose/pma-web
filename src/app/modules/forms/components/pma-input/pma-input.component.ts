@@ -8,7 +8,7 @@ import { humanizePipe } from 'src/app/core/functions/humanize.function';
   template: `
     <mat-form-field [formGroup]="form.control" [appearance]="appearance" fxFlexFill>
       <mat-label> {{ label }} </mat-label>
-      <input matInput #inputField="matInput" [formControlName]="name" [type]="type" />
+      <input matInput #inputField="matInput" [formControlName]="name" type="{{ type }}" />
       <mat-error>{{ form.control.get(name)['errorMessage'] }}</mat-error>
     </mat-form-field>
   `,

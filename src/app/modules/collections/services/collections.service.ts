@@ -49,5 +49,9 @@ export abstract class CollectionService<T> {
     return this.db.collection(this.collection).doc(id);
   }
 
+  getValueChanges() {
+    return this.db.collection(this.collection).valueChanges();
+  }
+
   constructor(private db: AngularFirestore) {}
 }

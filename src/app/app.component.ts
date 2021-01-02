@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from './core/services/auth.service';
+import { LoadingService } from './core/services/loading.service';
 
 @Component({
   selector: 'pma-root',
@@ -9,16 +10,20 @@ import { AuthService } from './core/services/auth.service';
     <pma-navigation>
       <router-outlet></router-outlet>
     </pma-navigation>
+
+    <ngx-spinner></ngx-spinner>
   `,
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
   title = 'Progressive Mental Alignment';
-  constructor(private authSvc: AuthService, private router: Router) {}
+  constructor(private authSvc: AuthService, private router: Router, private loadingSvc: LoadingService) {}
 
   ngOnInit() {
     this.authSvc.user$.subscribe((obs) => {
       // if (obs) this.router.navigate(['home']);
     });
+
+    // this.loadingSvc.start();
   }
 }

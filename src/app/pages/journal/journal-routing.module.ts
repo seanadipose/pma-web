@@ -4,15 +4,16 @@ import { CreateJournalFormComponent } from './components/create-journal-form/cre
 import { JournalComponent } from './journal.component';
 import { CreateJournalPageComponent } from './views/create-journal-page/create-journal-page.component';
 import { JournalPageComponent } from './views/journal-page/journal-page.component';
+import { JournalsPageComponent } from './views/journals-page/journals-page.component';
 
 const routes: Routes = [
   {
     path: '',
     component: JournalComponent,
     children: [
-      { path: '', component: JournalPageComponent },
+      { path: '', component: JournalsPageComponent },
       { path: 'new', component: CreateJournalPageComponent },
-
+      { path: ':/id', component: JournalPageComponent, pathMatch: 'full' },
       // { path: ':/id', component: JournalPageComponent },
     ],
   },

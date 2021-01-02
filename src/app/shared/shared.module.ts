@@ -8,6 +8,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatChipsModule } from '@angular/material/chips';
+import { ButtonContainerComponent } from './components/button-container/button-container.component';
 
 const MAT_MODULES = [
   FlexLayoutModule,
@@ -21,8 +22,8 @@ const MAT_MODULES = [
 ];
 
 @NgModule({
-  declarations: [],
+  declarations: [ButtonContainerComponent],
   imports: [CommonModule, ...MAT_MODULES],
-  exports: [FlexLayoutModule, ...MAT_MODULES],
+  exports: [FlexLayoutModule, ...MAT_MODULES, ButtonContainerComponent],
 })
 export class SharedModule {}

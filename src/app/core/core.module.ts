@@ -3,10 +3,14 @@ import { CommonModule } from '@angular/common';
 import { ModuleWithProviders } from '@angular/compiler/src/core';
 import { PMA_NAV_LIST } from './tokens/navlist.token';
 import { NavlistItem } from './models/navlist-item.model';
-import { VALIDATION_MESSAGES } from './constants/validation-messages.constant';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorInterceptor } from './interceptors/errors.interceptor';
+import { LoaderInterceptor } from './interceptors/loader.interceptor';
+
+import { snackBarConfig } from './tokens/snackbar.token';
+
+const config = snackBarConfig.defaults;
 
 @NgModule({
   declarations: [],
@@ -25,6 +29,8 @@ export class CoreModule {
       providers: [
         { provide: PMA_NAV_LIST, useValue: navList },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
+        { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: config },
       ],
     };
   }

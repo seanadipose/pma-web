@@ -27,6 +27,7 @@
     "@rxweb/reactive-form-validators": "^2.1.2",
     "c": "^1.1.1",
     "firebase": "^8.2.1",
+    "ngx-spinner": "^10.0.1",
     "remeda": "0.0.27",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

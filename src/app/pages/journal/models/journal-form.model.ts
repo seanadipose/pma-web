@@ -4,7 +4,9 @@ import { Journal } from 'src/app/core/models/journal.model';
 import { BaseForm } from 'src/app/modules/forms/models/base-form.model';
 
 const date = new Date();
-const now = `${date.getHours()}:${date.getMinutes}`;
+const hours = date.getHours();
+const minutes = date.getMinutes();
+const now = `${hours}:${minutes}`;
 export interface JournalForm extends Journal {}
 
 @Injectable({ providedIn: 'any' })

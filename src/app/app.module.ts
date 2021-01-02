@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +23,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatMenuModule } from '@angular/material/menu';
 
 import * as R from 'remeda';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { MatNativeDateModule } from '@angular/material/core';
 
 const navList = R.concat(NAV_LIST, []);
 
@@ -30,6 +32,8 @@ const navList = R.concat(NAV_LIST, []);
   declarations: [AppComponent, NavigationComponent],
   imports: [
     BrowserModule,
+    MatNativeDateModule,
+
     CoreModule.forRoot(navList),
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -44,8 +48,10 @@ const navList = R.concat(NAV_LIST, []);
     AngularFireAuthModule,
     FlexLayoutModule,
     MatMenuModule,
+    NgxSpinnerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}

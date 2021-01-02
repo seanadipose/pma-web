@@ -9,4 +9,5 @@ export const environment = {
     appId: '1:413724151033:web:d8c0f3c14ce59d8e5fa628',
     measurementId: 'G-M980BKRJ1D',
   },
+  timeout: 10000,
 };

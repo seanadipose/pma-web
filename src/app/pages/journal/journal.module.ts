@@ -11,9 +11,10 @@ import { MatMenuModule } from '@angular/material/menu';
 import { FormsModule } from 'src/app/modules/forms/forms.module';
 import { CreateJournalFormComponent } from './components/create-journal-form/create-journal-form.component';
 import { CreateJournalPageComponent } from './views/create-journal-page/create-journal-page.component';
+import { JournalsPageComponent } from './views/journals-page/journals-page.component';
 
 @NgModule({
-  declarations: [JournalComponent, JournalPageComponent, JournalFormComponent, CreateJournalFormComponent, CreateJournalPageComponent],
+  declarations: [JournalComponent, JournalPageComponent, JournalFormComponent, CreateJournalFormComponent, CreateJournalPageComponent, JournalsPageComponent],
   imports: [CommonModule, JournalRoutingModule, SharedModule, FormsModule, MatMenuModule],
 })
 export class JournalModule {}

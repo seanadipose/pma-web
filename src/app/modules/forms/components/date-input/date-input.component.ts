@@ -1,5 +1,6 @@
 import { Component, Host, OnInit, Optional } from '@angular/core';
 import { ControlContainer } from '@angular/forms';
+import { MatNativeDateModule } from '@angular/material/core';
 import { dateBuilder } from 'src/app/core/functions/dates.function';
 import { PmaInputComponent } from '../pma-input/pma-input.component';
 
@@ -17,6 +18,7 @@ const dates = dateBuilder();
     </mat-form-field>
   `,
   styleUrls: ['./date-input.component.scss'],
+  providers: [MatNativeDateModule],
 })
 export class DateInputComponent extends PmaInputComponent implements OnInit {
   maxDate = new Date();

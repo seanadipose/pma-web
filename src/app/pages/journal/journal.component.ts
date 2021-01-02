@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { JournalCollectionService } from 'src/app/modules/collections/services/journal-collections.service';
 
 @Component({
   selector: 'pma-journal',
@@ -30,9 +31,14 @@ import { Component, OnInit } from '@angular/core';
   styles: [],
 })
 export class JournalComponent implements OnInit {
-  constructor() {}
+  items: any;
+  constructor(private journalSvc: JournalCollectionService) {}
 
   ngOnInit(): void {
     console.log('started');
+    this.items = this.journalSvc.getValueChanges();
+    this.items.subscribe((obs) => console.log(obs));
+
+    const items = this.journalSvc.getCollection().subscribe((res) => console.log(res));
   }
 }

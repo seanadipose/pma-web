@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { JournalCollectionsService } from './journal-collections.service';
+import { JournalCollectionService } from './journal-collections.service';
 
 describe('JournalCollectionsService', () => {
-  let service: JournalCollectionsService;
+  let service: JournalCollectionService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(JournalCollectionsService);
+    service = TestBed.inject(JournalCollectionService);
   });
 
   it('should be created', () => {
