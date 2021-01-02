@@ -1,30 +1,47 @@
-import { Injectable } from '@angular/core';
+import { Injectable, SkipSelf } from '@angular/core';
 import { CollectionReference } from '@angular/fire/firestore';
 import { UserCollection, UserCollectionService } from 'src/app/modules/collections/services/user-collections.service';
 import { User, UserForm } from 'src/app/modules/user/models/user-form.model';
+import { AuthService } from 'src/app/modules/user/services/auth.service';
+import firebase from 'firebase/app';
+import { filter, switchMap } from 'rxjs/operators';
+import { BehaviorSubject, of } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class StateService {
-  user: UserCollection;
-  userRef: CollectionReference<UserForm>;
-  private _userId: any;
-  _email: string;
+  #user: UserCollection;
+  #userRef: CollectionReference<UserForm>;
+  // private _userId: any;
+  #email: string;
 
-  get email() {
-    return this._email;
+  private userIdSub = new BehaviorSubject<string>(null);
+
+  userId$() {
+    return this.userIdSub.asObservable();
   }
 
-  get userId() {
-    return this._userId;
+  setUserId(id: string) {
+    this.userIdSub.next(id);
   }
 
-  constructor(private userSvc: UserCollectionService) {}
+  private setUser(user: Partial<firebase.UserInfo> = { email: null }) {
+    const { email = null } = user;
 
-  async init(user: User) {
-    if (!user.uid) throw new Error('no user Id');
-    this._userId = await this.userSvc.userId(user.email).toPromise();
-    this._email = user.email;
+    return email;
+  }
 
-    // const res = await this.userRef.doc(user.uid);
+  constructor(private authSvc: AuthService, private userSvc: UserCollectionService) {
+    // subscribe((result) => (this.#email = result ? this.setUser(result) : null));
+  }
+
+  init(user: User) {
+    // this.authSvc.user$
+    //   .pipe(
+    //     filter((user) => !!user),
+    //     switchMap((email) => this.userSvc.userId(this.setUser(email)))
+    //   )
+    //   .subscribe((user) => (user ? this.userIdSub.next(user) : null));
+
+    return this.userSvc.userId(this.setUser(user));
   }
 }

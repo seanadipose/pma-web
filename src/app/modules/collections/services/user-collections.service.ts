@@ -27,7 +27,7 @@ export class UserCollectionService extends CollectionService<UserCollection> {
 
   // collectionRef
 
-  constructor(public db: AngularFirestore) {
+  constructor(public db: AngularFirestore, private authService: AuthService) {
     super(db);
     this.collectionRef = this.db.collection<UserCollection>(`${userSegment}`).ref;
   }

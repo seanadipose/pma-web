@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IFormGroup, RxFormBuilder } from '@rxweb/reactive-form-validators';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { filter, map, switchMap } from 'rxjs/operators';
 import { Journal } from 'src/app/core/models/journal.model';
 import { StateService } from 'src/app/core/services/state-service';
 import { JournalCollectionService } from 'src/app/modules/collections/services/journal-collections.service';
@@ -36,9 +36,17 @@ export class JournalPageComponent implements OnInit {
     const { id } = this.activatedRoute.snapshot.params;
     // this.journal$ =
 
-    this.journalSvc
-      .getOne(this.stateSvc.userId, id)
-      .toPromise()
-      .then((obs) => console.log(obs.metadata));
+    this.stateSvc
+      .userId$()
+      .pipe(
+        filter((res) => !!res),
+        switchMap((userId) =>
+          this.journalSvc
+            .getOne(userId, id)
+            .toPromise()
+            .then((obs) => console.log(obs.metadata))
+        )
+      )
+      .subscribe((obs) => console.log(obs));
   }
 }

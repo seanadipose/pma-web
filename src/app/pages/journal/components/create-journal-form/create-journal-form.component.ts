@@ -169,10 +169,10 @@ export class CreateJournalFormComponent implements OnInit {
     const journal = new Journal({ ...data, rating, emotionsList: emotions }).value;
     console.log('run');
     try {
-      const res = await this.journalSvc.create(this.stateSvc.userId, journal);
+      // const res = await this.journalSvc.create(this.stateSvc.userId, journal);
 
       this.loadingSvc.responseSnackBar();
-      this.router.navigate([`journals/${res.id}`]);
+      // this.router.navigate([`journals/${res.id}`]);
     } catch (err) {
       this.loadingSvc.responseSnackBar(false);
       console.log(err);

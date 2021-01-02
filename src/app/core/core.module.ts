@@ -15,7 +15,14 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from 'src/environments/environment';
 import { UserModule } from '../modules/user/user.module';
+import { USER_FIELDS_TOKEN } from './tokens/user-fields.token';
 
+import { USER_FIELDS } from '../modules/user/constants/user-fields.constant';
+
+import * as R from 'remeda';
+import { StateService } from './services/state-service';
+
+const userFields = R.concat(USER_FIELDS);
 const config = snackBarConfig.defaults;
 
 @NgModule({
@@ -44,8 +51,11 @@ export class CoreModule {
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
         { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: config },
+        { provide: USER_FIELDS_TOKEN, useValue: userFields },
 
         AngularFireAuth,
+        AuthService,
+        StateService,
       ],
     };
   }

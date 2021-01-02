@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { from, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { Journal } from 'src/app/core/models/journal.model';
 import { StateService } from 'src/app/core/services/state-service';
 import { JournalCollectionService } from 'src/app/modules/collections/services/journal-collections.service';
@@ -24,7 +24,8 @@ export class JournalsPageComponent implements OnInit {
   constructor(private stateSvc: StateService, private journalSvc: JournalCollectionService) {}
 
   ngOnInit(): void {
-    this.journals$ = from(this.journalSvc.list(this.stateSvc.userId)).pipe(
+    this.journals$ = this.stateSvc.userId$().pipe(
+      switchMap((userId) => this.journalSvc.list(userId)),
       map((res) => res.docs.map((doc) => doc.data() as Journal))
     );
     this.journals$.subscribe((obs) => console.log(obs));

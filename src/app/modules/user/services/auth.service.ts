@@ -81,8 +81,8 @@ export class AuthService {
       throw new Error('auth service imported twice');
     }
     console.log('auth service started');
-    this.checkUser()
-      .pipe(take(1))
-      .subscribe((res) => (this._user = res));
+    // this.checkUser()
+    //   .pipe(take(1))
+    //   .subscribe((res) => (this._user = res));
   }
 }

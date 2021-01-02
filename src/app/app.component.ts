@@ -34,12 +34,15 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.authSvc
       .checkUser()
-      .pipe(switchMap((obs) => from(this.stateSvc.init(obs))))
+      .pipe(switchMap((obs) => (obs ? this.stateSvc.init(obs) : null)))
       .subscribe((res) => {
+        console.log('🚀 ----------------------------------------------------------------------------');
+        console.log('🚀 ~ file: app.component.ts ~ line 39 ~ AppComponent ~ .subscribe ~ res', res);
+        console.log('🚀 ----------------------------------------------------------------------------');
         console.log('loaded');
-
-        this.isReady = true;
-        this.loadingSvc.hide();
+        this.stateSvc.setUserId(res ? res : '');
+        res ? this.loadingSvc.hide() : this.loadingSvc.start();
+        this.isReady = !!res;
       });
   }
 }
