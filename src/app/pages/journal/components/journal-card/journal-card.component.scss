@@ -1,12 +1,16 @@
 mat-card {
   margin-bottom: 15px;
-  mat-card-title-group {
-    height: 100px;
-  }
+
 
   mat-card-content {
-    height: 200px;
     width: 400px;
+    margin-top: 20px;
+
+    agm-map {
+      height: 300px;
+    }
+
+
   }
 
   mat-card-footer {
@@ -14,3 +18,9 @@ mat-card {
     margin-right: 10px;
   }
 }
+
+.feelings-list {
+      // min-height: 75px;
+      margin-bottom: 15px
+
+    }

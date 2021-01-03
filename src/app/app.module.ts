@@ -21,6 +21,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import * as R from 'remeda';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { MatNativeDateModule } from '@angular/material/core';
+import { AgmCoreModule } from '@agm/core';
 
 const navList = R.concat(NAV_LIST, []);
 
@@ -39,7 +40,9 @@ const navList = R.concat(NAV_LIST, []);
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBLhvZLX4rxcz_6GjJXn0ED5qUJuEm1A0w',
+    }),
     FlexLayoutModule,
     MatMenuModule,
     NgxSpinnerModule,
@@ -47,5 +50,6 @@ const navList = R.concat(NAV_LIST, []);
   providers: [],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  exports: [],
 })
 export class AppModule {}

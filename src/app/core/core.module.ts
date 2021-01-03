@@ -25,16 +25,20 @@ import { StateService } from './services/state-service';
 const userFields = R.concat(USER_FIELDS);
 const config = snackBarConfig.defaults;
 
+import { AgmCoreModule } from '@agm/core';
+
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
     MatSnackBarModule,
     AngularFireModule.initializeApp(environment.firebase),
+
     AngularFirestoreModule,
     AngularFireAuthModule,
     UserModule,
   ],
+  exports: [],
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() coreModule: CoreModule) {

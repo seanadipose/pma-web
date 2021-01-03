@@ -13,9 +13,18 @@ import { CreateJournalFormComponent } from './components/create-journal-form/cre
 import { CreateJournalPageComponent } from './views/create-journal-page/create-journal-page.component';
 import { JournalsPageComponent } from './views/journals-page/journals-page.component';
 import { JournalCardComponent } from './components/journal-card/journal-card.component';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
-  declarations: [JournalComponent, JournalPageComponent, JournalFormComponent, CreateJournalFormComponent, CreateJournalPageComponent, JournalsPageComponent, JournalCardComponent],
-  imports: [CommonModule, JournalRoutingModule, SharedModule, FormsModule, MatMenuModule],
+  declarations: [
+    JournalComponent,
+    JournalPageComponent,
+    JournalFormComponent,
+    CreateJournalFormComponent,
+    CreateJournalPageComponent,
+    JournalsPageComponent,
+    JournalCardComponent,
+  ],
+  imports: [CommonModule, JournalRoutingModule, SharedModule, FormsModule, MatMenuModule, AgmCoreModule],
 })
 export class JournalModule {}

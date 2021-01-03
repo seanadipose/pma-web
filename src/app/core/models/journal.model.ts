@@ -10,7 +10,7 @@ export interface Journal {
   description?: string;
   emotions?: string[];
   place: string;
-  geoloc: string;
+  geoloc: [number, number];
   dateTime: Date | firebase.firestore.Timestamp;
   rating: number;
   time: any;

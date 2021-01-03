@@ -24,7 +24,7 @@ export class JournalForm extends BaseForm {
   emotions: string[];
 
   @prop()
-  geoloc: string;
+  geoloc: [number, number];
 
   @prop()
   description: string;
