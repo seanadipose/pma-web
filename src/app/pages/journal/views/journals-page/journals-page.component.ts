@@ -9,11 +9,11 @@ import { JournalCollectionService } from 'src/app/modules/collections/services/j
   selector: 'pma-journals-page',
   template: `
     <!-- <div fxLayout="row wrap" fxLayoutAlign="space-evenly stretch" fxLayoutGap="15px" class="card-container"> -->
-    <ng-container *ngIf="journals$ | async as journals">
-      <mat-grid-list [cols]="mapCols(journals.length)" colspan="1" gutterSize="15px">
-        <pma-journal-card mat-grid-tile *ngFor="let jrnl of journals" [journal]="jrnl"></pma-journal-card>
-      </mat-grid-list>
-    </ng-container>
+    <mat-grid-list cols="3" colspan="1" gutterSize="15px">
+      <mat-grid-tile *ngFor="let jrnl of journals$ | async" [colspan]="1" [rowspan]="1">
+        <pma-journal-card [journal]="jrnl" class="dashboard-card"></pma-journal-card>
+      </mat-grid-tile>
+    </mat-grid-list>
     <!-- </div> -->
   `,
   styleUrls: ['./journals-page.component.scss'],
@@ -28,7 +28,9 @@ export class JournalsPageComponent implements OnInit {
   ngOnInit(): void {
     this.journals$ = this.stateSvc.userId$().pipe(
       switchMap((userId) => this.journalSvc.list(userId)),
+
       map((res) => res.docs.map((doc) => doc.data() as Journal))
+      // map((jrnl) => ({ ...jrnl, cols: 1, rows: 1 }))
     );
     // .then((res) => console.log(res.docs.map((doc) => doc.data())));
   }

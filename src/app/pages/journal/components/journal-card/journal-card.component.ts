@@ -21,22 +21,30 @@ const pickJournal = (jrnl: Journal) =>
   template: `
     <mat-card>
       <mat-card-title-group>
-        <mat-card-title>{{ title }}</mat-card-title>
+        <mat-card-title>
+          <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="start center">
+            <mat-icon [inline]="true" color="accent">{{ rating }}</mat-icon
+            ><span>{{ title }}</span>
+          </div></mat-card-title
+        >
         <mat-card-subtitle>{{ subTitle }}</mat-card-subtitle>
       </mat-card-title-group>
+
+      <div mat-card-image class="trigger-map">
+        <agm-map [latitude]="lat" [longitude]="lng"></agm-map>
+      </div>
 
       <mat-card-content>
         <div class="feelings-list">
           <mat-chip-list>
             <ng-container *ngFor="let emotion of emotionsList">
-              <mat-chip color="primary">
+              <mat-chip color="accent" selected>
                 {{ emotion | titlecase }}
                 <mat-icon matChipTrailingIcon>face</mat-icon>
               </mat-chip>
             </ng-container>
           </mat-chip-list>
         </div>
-        <agm-map [latitude]="lat" [longitude]="lng"></agm-map>
       </mat-card-content>
       <mat-card-actions> </mat-card-actions>
       <!-- <mat-card-footer fxLayout="row" fxLayoutAlign="end start">
@@ -55,24 +63,25 @@ export class JournalCardComponent extends Card implements OnInit {
   // fields: JournalKeysType[] = ['title', 'place', 'dateTime', 'time', 'emotionsList'];
   lat: number;
   lng: number;
+  rating: string;
   emotionsList: string[];
+  ratingsIcons = [
+    'sentiment_very_dissatisfied',
+    'sentiment_very_dissatisfied',
+    'sentiment_dissatisfied',
+    'sentiment_dissatisfied',
+    'sentiment_satisfied',
+    'sentiment_very_satisfied',
+  ];
 
   makeCard(jrnl: ReturnType<typeof pickJournal>) {
     const locTupleToLatLong = (locTuple: [number, number]) =>
       locTuple?.length > 0 ? { lat: locTuple[0], lng: locTuple[1] } : { lat: null, long: null };
 
     const ratingsMap = (rating = 1) => {
-      const ratingsIcons = [
-        'sentiment_very_dissatisfied',
-        'sentiment_very_dissatisfied',
-        'sentiment_dissatisfied',
-        'sentiment_dissatisfied',
-        'sentiment_satisfied',
-        'sentiment_very_satisfied',
-      ];
       const ratings = R.pipe(
         R.range(1, rating),
-        R.map((num) => ratingsIcons[num])
+        R.map((num) => this.ratingsIcons[num])
       );
       return ratings;
     };
@@ -90,7 +99,7 @@ export class JournalCardComponent extends Card implements OnInit {
       lat,
       lng,
       emotionsList: emotionsList.length > 0 ? emotionsList : ['meh..'],
-      ratings,
+      rating: this.ratingsIcons[rating],
     });
   }
 

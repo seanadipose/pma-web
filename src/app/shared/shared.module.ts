@@ -9,6 +9,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatChipsModule } from '@angular/material/chips';
 import { ButtonContainerComponent } from './components/button-container/button-container.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatMenuModule } from '@angular/material/menu';
+import { LayoutModule } from '@angular/cdk/layout';
 
 const MAT_MODULES = [
   FlexLayoutModule,
@@ -19,11 +23,12 @@ const MAT_MODULES = [
   MatIconModule,
   MatListModule,
   MatChipsModule,
+  MatGridListModule,
 ];
 
 @NgModule({
-  declarations: [ButtonContainerComponent],
-  imports: [CommonModule, ...MAT_MODULES],
-  exports: [FlexLayoutModule, ...MAT_MODULES, ButtonContainerComponent],
+  declarations: [ButtonContainerComponent, DashboardComponent],
+  imports: [CommonModule, ...MAT_MODULES, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule, LayoutModule],
+  exports: [FlexLayoutModule, ...MAT_MODULES, ButtonContainerComponent, DashboardComponent],
 })
 export class SharedModule {}

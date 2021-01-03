@@ -1,9 +1,7 @@
-.card-container {
-  padding: 15px;
+.grid-container {
+  margin: 20px;
 }
-.mat-grid-tile .mat-figure  {
-  align-items: start !important;
-}
+
 .dashboard-card {
   position: absolute;
   top: 15px;
@@ -12,6 +10,11 @@
   bottom: 15px;
 }
 
+.more-button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
 
 .dashboard-card-content {
   text-align: center;
