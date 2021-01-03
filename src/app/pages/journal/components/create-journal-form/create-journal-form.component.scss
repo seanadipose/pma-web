@@ -1,3 +1,12 @@
 .step-container {
   margin-top: 16px;
 }
+
+mat-card{
+  max-width: 600px;
+  margin: 15px;
+}
+
+mat-horizontal-stepper {
+  max-width: 600px;
+}

@@ -29,13 +29,16 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
                 "./src/styles"
               ]
             },
+            "allowedCommonJsDependencies": [
+              "ngx-bootstrap-icons"
+            ],
             "scripts": []
           },
           "configurations": {

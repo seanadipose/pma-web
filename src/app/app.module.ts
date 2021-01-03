@@ -22,6 +22,25 @@ import * as R from 'remeda';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { MatNativeDateModule } from '@angular/material/core';
 import { AgmCoreModule } from '@agm/core';
+import { Loader } from '@googlemaps/js-api-loader';
+
+import {
+  NgxBootstrapIconsModule,
+  alarm,
+  alarmFill,
+  alignBottom,
+  emojiAngryFill,
+  emojiAngry,
+  allIcons,
+} from 'ngx-bootstrap-icons';
+// Select some icons (use an object, not an array)
+const icons = {
+  alarm,
+  alarmFill,
+  alignBottom,
+  emojiAngryFill,
+  emojiAngry,
+};
 
 const navList = R.concat(NAV_LIST, []);
 
@@ -46,10 +65,11 @@ const navList = R.concat(NAV_LIST, []);
     FlexLayoutModule,
     MatMenuModule,
     NgxSpinnerModule,
+    NgxBootstrapIconsModule.pick(allIcons),
   ],
   providers: [],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  exports: [],
+  exports: [NgxBootstrapIconsModule],
 })
 export class AppModule {}

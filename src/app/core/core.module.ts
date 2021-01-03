@@ -21,11 +21,10 @@ import { USER_FIELDS } from '../modules/user/constants/user-fields.constant';
 
 import * as R from 'remeda';
 import { StateService } from './services/state-service';
+import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 
 const userFields = R.concat(USER_FIELDS);
 const config = snackBarConfig.defaults;
-
-import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [],
@@ -37,6 +36,7 @@ import { AgmCoreModule } from '@agm/core';
     AngularFirestoreModule,
     AngularFireAuthModule,
     UserModule,
+    MatIconModule,
   ],
   exports: [],
 })

@@ -42,10 +42,10 @@ export class JournalCollectionService extends CollectionService<Journal> {
   }
 
   getOne(userId: string, docId) {
-    this.db
-      .collection('users')
-      .snapshotChanges()
-      .subscribe((docs) => console.log(docs));
-    return this.db.collection<Journal>(`users`).get();
+    // this.db
+    //   .collection('users')
+    //   .snapshotChanges()
+    //   .subscribe((docs) => console.log(docs));
+    // return this.db.collection<Journal>(`users`).get();
   }
 }

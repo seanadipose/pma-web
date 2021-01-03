@@ -17,7 +17,6 @@ export class HoverDirective {
   @HostListener('mouseenter')
   onMouseEnter() {
     this.className = this.hoverClass;
-    console.log(this);
   }
   @HostListener('mouseleave')
   onMouseExit() {

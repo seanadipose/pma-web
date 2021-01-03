@@ -34,7 +34,9 @@ const pickJournal = (jrnl: Journal) =>
       </mat-card-header>
 
       <div mat-card-image class="trigger-map">
-        <agm-map [latitude]="lat" [longitude]="lng"></agm-map>
+        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="12" [disableDefaultUI]="true">
+          <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+        </agm-map>
       </div>
 
       <mat-card-content>

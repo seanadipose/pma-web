@@ -24,6 +24,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { SelectInputComponent } from './components/select-input/select-input.component';
 import { MatSelectModule } from '@angular/material/select';
 import { AutocompleteInputComponent } from './components/autocomplete-input/autocomplete-input.component';
+import { IconPickerInputComponent } from './components/icon-picker-input/icon-picker-input.component';
+import { IconButtonDirective } from './directives/icon-button.directive';
+import { NgxBootstrapIconsModule } from 'ngx-bootstrap-icons';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 const MAT_MODULES = [
   MatFormFieldModule,
@@ -47,6 +51,8 @@ const components = [PmaInputComponent, AutocompleteInputComponent];
     PmaTextboxInputComponent,
     LocationInputComponent,
     SelectInputComponent,
+    IconPickerInputComponent,
+    IconButtonDirective,
   ],
   imports: [
     CommonModule,
@@ -56,6 +62,8 @@ const components = [PmaInputComponent, AutocompleteInputComponent];
     ...MAT_MODULES,
     MatIconModule,
     MatButtonModule,
+    NgxBootstrapIconsModule,
+    FlexLayoutModule,
   ],
   exports: [
     ReactiveFormsModule,
@@ -67,8 +75,11 @@ const components = [PmaInputComponent, AutocompleteInputComponent];
     PmaTextboxInputComponent,
     LocationInputComponent,
     SelectInputComponent,
+    IconPickerInputComponent,
   ],
   providers: [{ provide: PMA_VALIDATION_MESSAGES, useValue: validations }, PmaFormsService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class FormsModule {}
+export class FormsModule {
+  constructor() {}
+}

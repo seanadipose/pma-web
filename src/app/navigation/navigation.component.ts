@@ -23,6 +23,13 @@ import { LoadingService } from '../core/services/loading.service';
         >
           <mat-toolbar color="primary" class="menu-toolbar">Menu</mat-toolbar>
           <mat-nav-list fxLayout="column" fxLayoutGap="5px">
+            <mat-list-item>
+              <button mat-raised-button fxFlexFill mat-line color="primary" routerLink="journals/new">
+                Trigger
+                <mat-icon> add</mat-icon>
+              </button>
+            </mat-list-item>
+
             <mat-list-item
               *ngFor="let listItem of navList"
               fxFlex="100%"

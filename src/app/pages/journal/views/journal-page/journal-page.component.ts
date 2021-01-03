@@ -36,17 +36,17 @@ export class JournalPageComponent implements OnInit {
     const { id } = this.activatedRoute.snapshot.params;
     // this.journal$ =
 
-    this.stateSvc
-      .userId$()
-      .pipe(
-        filter((res) => !!res),
-        switchMap((userId) =>
-          this.journalSvc
-            .getOne(userId, id)
-            .toPromise()
-            .then((obs) => console.log(obs.metadata))
-        )
-      )
-      .subscribe((obs) => console.log(obs));
+    // this.stateSvc
+    //   .userId$()
+    //   .pipe(
+    //     filter((res) => !!res),
+    //     switchMap((userId) =>
+    //       this.journalSvc
+    //         .getOne(userId, id)
+    //         .toPromise()
+    //         .then((obs) => console.log(obs.metadata))
+    //     )
+    //   )
+    //   .subscribe((obs) => console.log(obs));
   }
 }

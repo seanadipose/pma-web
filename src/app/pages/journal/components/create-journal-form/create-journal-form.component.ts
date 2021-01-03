@@ -13,29 +13,19 @@ import { JournalFormComponent } from '../journal-form/journal-form.component';
 @Component({
   selector: 'pma-create-journal-form',
   template: `
-    <mat-horizontal-stepper #stepper (selectionChange)="onChange($event)" [selectedIndex]="selectedIndex">
+    <mat-horizontal-stepper
+      #stepper
+      (selectionChange)="onChange($event)"
+      [selectedIndex]="selectedIndex"
+      color="success"
+    >
       <form [formGroup]="fg">
         <mat-step [hasError]="selectedIndex > 0 && emotionCloud.selectedOptions.length < 1">
-          <ng-template matStepLabel>How you feel</ng-template>
+          <ng-template matStepLabel>How bad is it?</ng-template>
           <!-- <mat-form-field> -->
           <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="30px" class="step-container">
             <mat-label>How's your mood?</mat-label>
-            <mat-slider
-              step="1"
-              tickInterval="1"
-              max="5"
-              formControlName="rating"
-              [thumbLabel]="true"
-              defaultTabIndex="3"
-              startAt="3"
-              #slide="matSlider"
-            ></mat-slider>
-            <span style="margin-bottom: 20px;">{{ fg.get('rating').value }}</span>
-            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15px">
-              <ng-container *ngFor="let item of getArray(slide.value)">
-                <mat-icon color="accent">star_rate</mat-icon>
-              </ng-container>
-            </div>
+            <pma-icon-picker-input #moodScale="iconInput" [(rating)]="rating"></pma-icon-picker-input>
             <pma-autocomplete-input
               name="emotions"
               label="How are you feeling?"
@@ -98,7 +88,7 @@ import { JournalFormComponent } from '../journal-form/journal-form.component';
               mat-raised-button
               matStepperNext
               color="primary"
-              (click)="submit(fg.getRawValue(), emotionCloud.selectedOptions, slide.value)"
+              (click)="submit(fg.getRawValue(), emotionCloud.selectedOptions, moodScale.rating)"
             >
               Submit
             </button>
@@ -118,6 +108,7 @@ import { JournalFormComponent } from '../journal-form/journal-form.component';
 export class CreateJournalFormComponent implements OnInit {
   @Input() fg: any;
   selectedIndex = 0;
+  rating: number = 0;
   emotionOptions: Observable<string[]>;
   placeOptions: Observable<string[]>;
   @Output() onSubmit = new EventEmitter<any>();
