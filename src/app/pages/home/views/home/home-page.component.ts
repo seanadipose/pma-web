@@ -36,7 +36,7 @@ export class HomePageComponent implements OnInit {
   ngOnInit(): void {
     // const builder = this.formSvc.makeForm(this.userForm);
     // this.userForm = builder(this.authSvc.user);
-    this.user$ = this.authSvc.checkUser().pipe(map((user) => user));
+    // this.user$ = this.authSvc.checkUser().pipe(map((user) => user));
   }
 
   async updateUser(user: UserForm) {

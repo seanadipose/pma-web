@@ -1,5 +1,10 @@
 import * as R from 'remeda';
 
+export interface TimeStampType {
+  nanoseconds: number;
+  seconds: number;
+}
+
 export interface Journal {
   title: string;
   description?: string;

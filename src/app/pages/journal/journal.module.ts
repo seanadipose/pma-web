@@ -12,9 +12,10 @@ import { FormsModule } from 'src/app/modules/forms/forms.module';
 import { CreateJournalFormComponent } from './components/create-journal-form/create-journal-form.component';
 import { CreateJournalPageComponent } from './views/create-journal-page/create-journal-page.component';
 import { JournalsPageComponent } from './views/journals-page/journals-page.component';
+import { JournalCardComponent } from './components/journal-card/journal-card.component';
 
 @NgModule({
-  declarations: [JournalComponent, JournalPageComponent, JournalFormComponent, CreateJournalFormComponent, CreateJournalPageComponent, JournalsPageComponent],
+  declarations: [JournalComponent, JournalPageComponent, JournalFormComponent, CreateJournalFormComponent, CreateJournalPageComponent, JournalsPageComponent, JournalCardComponent],
   imports: [CommonModule, JournalRoutingModule, SharedModule, FormsModule, MatMenuModule],
 })
 export class JournalModule {}

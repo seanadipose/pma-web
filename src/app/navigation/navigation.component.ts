@@ -1,15 +1,17 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Host, Inject, Input, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { NavlistItem } from '../core/models/navlist-item.model';
 import { PMA_NAV_LIST } from '../core/tokens/navlist.token';
 import { AuthService } from '../modules/user/services/auth.service';
+import { StateService } from '../core/services/state-service';
+import { LoadingService } from '../core/services/loading.service';
 
 @Component({
   selector: 'pma-navigation',
   template: `
-    <ng-container>
+    <ng-container *ngIf="isReady">
       <mat-sidenav-container class="sidenav-container">
         <mat-sidenav
           #drawer
@@ -76,7 +78,13 @@ import { AuthService } from '../modules/user/services/auth.service';
   `,
   styleUrls: ['./navigation.component.scss'],
 })
-export class NavigationComponent {
+export class NavigationComponent implements OnInit {
+  isReady = false;
+  // @Input('userId') setUserId(id: string) {
+
+  // }
+
+  @Input() userId: string;
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map((result) => result.matches),
     shareReplay()
@@ -85,6 +93,12 @@ export class NavigationComponent {
   constructor(
     @Inject(PMA_NAV_LIST) public navList: NavlistItem[],
     private breakpointObserver: BreakpointObserver,
-    public authSvc: AuthService
+    private stateSvc: StateService,
+    private loadSvc: LoadingService
   ) {}
+
+  ngOnInit(): void {
+    this.stateSvc.setUserId(this.userId);
+    this.isReady = true;
+  }
 }

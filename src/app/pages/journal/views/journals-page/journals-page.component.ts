@@ -9,11 +9,8 @@ import { JournalCollectionService } from 'src/app/modules/collections/services/j
   selector: 'pma-journals-page',
   template: `
     <div fxLayout="row wrap" fxLayoutAlign="start stretch" fxLayoutGap="15px">
-      <ng-container *ngIf="journals$ | async as journals" fxLayout="col">
-        <mat-card *ngFor="let jrnl of journals" fxFlex="40%" fxFlexFill>
-          <mat-card-header>{{ jrnl.title }}</mat-card-header>
-          <mat-card-subtitle> {{ jrnl.place }} {{ jrnl.time }} </mat-card-subtitle>
-        </mat-card>
+      <ng-container *ngIf="journals$ | async as journals">
+        <pma-journal-card *ngFor="let jrnl of journals" [journal]="jrnl"></pma-journal-card>
       </ng-container>
     </div>
   `,
@@ -28,7 +25,6 @@ export class JournalsPageComponent implements OnInit {
       switchMap((userId) => this.journalSvc.list(userId)),
       map((res) => res.docs.map((doc) => doc.data() as Journal))
     );
-    this.journals$.subscribe((obs) => console.log(obs));
     // .then((res) => console.log(res.docs.map((doc) => doc.data())));
   }
 }

@@ -44,9 +44,8 @@ export class UserCollectionService extends CollectionService<UserCollection> {
     });
   }
   insertUserDoc(user: UserForm, providerId: string) {
-    const doc = this.db.collectionGroup;
-
-    return doc;
+    // const doc = this.db.collectionGroup(collectionId);
+    // return doc;
     // return collection;
   }
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { from } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { filter, switchMap, takeWhile } from 'rxjs/operators';
 import { AuthService } from './modules/user/services/auth.service';
 import { LoadingService } from './core/services/loading.service';
@@ -10,7 +10,7 @@ import { StateService } from './core/services/state-service';
   selector: 'pma-root',
   template: `
     <!--The content below is only a placeholder and can be replaced.-->
-    <pma-navigation *ngIf="isReady">
+    <pma-navigation *ngIf="userId$ | async as id" [userId]="id">
       <router-outlet></router-outlet>
     </pma-navigation>
 
@@ -21,28 +21,27 @@ import { StateService } from './core/services/state-service';
 export class AppComponent implements OnInit {
   title = 'Progressive Mental Alignment';
   isReady = false;
+  userId$: Observable<string>;
+  // userId$: any;
 
   constructor(
     private authSvc: AuthService,
     private stateSvc: StateService,
     private router: Router,
     private loadingSvc: LoadingService
-  ) {
-    this.loadingSvc.start();
-  }
+  ) {}
 
   ngOnInit() {
-    this.authSvc
-      .checkUser()
-      .pipe(
-        switchMap((obs) => (obs ? this.stateSvc.init(obs) : null)),
-        takeWhile((val) => !!val)
-      )
-      .subscribe((res) => {
-        console.log('loaded');
-        this.stateSvc.setUserId(res ? res : '');
-        res ? this.loadingSvc.hide() : this.loadingSvc.start();
-        this.isReady = !!res;
-      });
+    const userId = this.authSvc.checkUser().pipe(
+      // filter((id) => typeof id === 'string'),
+      switchMap((id) => this.stateSvc.init(id))
+      // takeWhile((val) => !!val)
+    );
+    // .subscribe((res) => {
+    //   console.log('loaded');
+    //   this.stateSvc.setUserId(res ? res : '');
+    //   this.isReady = !!res;
+    // });
+    this.userId$ = userId;
   }
 }

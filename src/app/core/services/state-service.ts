@@ -4,7 +4,7 @@ import { UserCollection, UserCollectionService } from 'src/app/modules/collectio
 import { User, UserForm } from 'src/app/modules/user/models/user-form.model';
 import { AuthService } from 'src/app/modules/user/services/auth.service';
 import firebase from 'firebase/app';
-import { filter, switchMap } from 'rxjs/operators';
+import { filter, share, switchMap } from 'rxjs/operators';
 import { BehaviorSubject, of } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
@@ -17,7 +17,10 @@ export class StateService {
   private userIdSub = new BehaviorSubject<string>(null);
 
   userId$() {
-    return this.userIdSub.asObservable();
+    return this.userIdSub.asObservable().pipe(
+      share(),
+      filter((id) => !!id)
+    );
   }
 
   setUserId(id: string) {
@@ -35,6 +38,9 @@ export class StateService {
   }
 
   init(user: User) {
+    console.log('🚀 ------------------------------------------------------------------------');
+    console.log('🚀 ~ file: state-service.ts ~ line 38 ~ StateService ~ init ~ user', user);
+    console.log('🚀 ------------------------------------------------------------------------');
     // this.authSvc.user$
     //   .pipe(
     //     filter((user) => !!user),
