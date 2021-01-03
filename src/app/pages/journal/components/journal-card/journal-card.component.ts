@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Journal, TimeStampType } from 'src/app/core/models/journal.model';
 import { dateCollFns } from '../../../../modules/collections/functions/date.function';
 import * as R from 'remeda';
+import { MatCard } from '@angular/material/card';
 
 // type CardType = ReturnType<typeof makeCard>;
 
@@ -19,7 +20,7 @@ const pickJournal = (jrnl: Journal) =>
 @Component({
   selector: 'pma-journal-card',
   template: `
-    <mat-card>
+    <mat-card #card pmaHover>
       <mat-card-header>
         <div mat-card-avatar class="icon">
           <mat-icon [inline]="true" [color]="colorMap(rating)">{{ iconMap(rating) }}</mat-icon>

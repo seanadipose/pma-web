@@ -13,6 +13,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatMenuModule } from '@angular/material/menu';
 import { LayoutModule } from '@angular/cdk/layout';
+import { HoverDirective } from './directives/hover.directive';
 
 const MAT_MODULES = [
   FlexLayoutModule,
@@ -26,9 +27,11 @@ const MAT_MODULES = [
   MatGridListModule,
 ];
 
+const directives = [HoverDirective];
+
 @NgModule({
-  declarations: [ButtonContainerComponent, DashboardComponent],
+  declarations: [ButtonContainerComponent, DashboardComponent, HoverDirective],
   imports: [CommonModule, ...MAT_MODULES, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule, LayoutModule],
-  exports: [FlexLayoutModule, ...MAT_MODULES, ButtonContainerComponent, DashboardComponent],
+  exports: [FlexLayoutModule, ...MAT_MODULES, ButtonContainerComponent, DashboardComponent, HoverDirective],
 })
 export class SharedModule {}
