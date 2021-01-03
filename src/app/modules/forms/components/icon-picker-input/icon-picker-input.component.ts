@@ -27,7 +27,13 @@ function mapIcons(icons: string[]) {
   selector: 'pma-icon-picker-input',
   template: `
     <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15px">
-      <button mat-icon-button pmaIconButton (click)="rating = i" *ngFor="let icon of ratingsIcons; index as i">
+      <button
+        mat-icon-button
+        pmaIconButton
+        (click)="rating = i"
+        *ngFor="let icon of ratingsIcons; index as i"
+        color="{{ rating >= i ? 'success' : undefined }}"
+      >
         <!-- <mat-icon [inline]="true" appearance="outline" color="{{ _value >= i ? 'success' : undefined }}">
         {{ icon }}</mat-icon
       > -->
