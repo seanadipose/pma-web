@@ -26,14 +26,14 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
             ],
             "styles": [
               "src/styles.scss",
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
-                "./src/styles"
+                "./src/styles",
+                "node_modules"
               ]
             },
             "allowedCommonJsDependencies": [
@@ -132,6 +132,30 @@
           "configurations": {
             "production": {
               "devServerTarget": "pma-app:serve:production"
+            }
+          }
+        },
+        "ionic-cordova-serve": {
+          "builder": "@ionic/angular-toolkit:cordova-serve",
+          "options": {
+            "cordovaBuildTarget": "pma-app:ionic-cordova-build",
+            "devServerTarget": "pma-app:serve"
+          },
+          "configurations": {
+            "production": {
+              "cordovaBuildTarget": "pma-app:ionic-cordova-build:production",
+              "devServerTarget": "pma-app:serve:production"
+            }
+          }
+        },
+        "ionic-cordova-build": {
+          "builder": "@ionic/angular-toolkit:cordova-build",
+          "options": {
+            "browserTarget": "pma-app:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "pma-app:build:production"
             }
           }
         }

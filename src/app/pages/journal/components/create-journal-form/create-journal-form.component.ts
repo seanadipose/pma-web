@@ -20,18 +20,25 @@ import { JournalFormComponent } from '../journal-form/journal-form.component';
       color="success"
     >
       <form [formGroup]="fg">
-        <mat-step [hasError]="selectedIndex > 0 && emotionCloud.selectedOptions.length < 1">
+        <mat-step [hasError]="selectedIndex > 0 && emotionCloud.selectedOptions.length < 1" style="height: 100%;">
           <ng-template matStepLabel>How bad is it?</ng-template>
           <!-- <mat-form-field> -->
-          <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="30px" class="step-container">
+          <div
+            fxLayout="column"
+            fxLayoutAlign="space-around center"
+            fxLayoutGap="30px"
+            class="step-container"
+            fxFlexFill
+          >
             <mat-label>How's your mood?</mat-label>
             <pma-icon-picker-input #moodScale="iconInput" [(rating)]="rating"></pma-icon-picker-input>
             <pma-autocomplete-input
               name="emotions"
-              label="How are you feeling?"
+              label="Describe feelings"
               style="margin-top: 15px;"
               [options]="emotionOptions | async"
               #emotionCloud="autoInput"
+              appearance="fill"
             ></pma-autocomplete-input>
             <mat-chip-list #chipList aria-label="Fruit selection">
               <mat-chip
@@ -61,7 +68,7 @@ import { JournalFormComponent } from '../journal-form/journal-form.component';
         </mat-step>
         <mat-step [hasError]="stepTwoInvalid" errorMessage="must fill out all fields">
           <ng-template matStepLabel>When and where</ng-template>
-          <div fxLayout="column" fxLayoutAlign="start" fxLayoutGap="10px" class="step-container">
+          <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" class="step-container" fxFlexFill>
             <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="15px" fxFlexFill>
               <pma-date-input name="dateTime" label="When it started" fxFlex="50"></pma-date-input>
               <pma-input type="time" name="time" label="Time of day" fxFlex="50"></pma-input>

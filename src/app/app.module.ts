@@ -22,7 +22,6 @@ import * as R from 'remeda';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { MatNativeDateModule } from '@angular/material/core';
 import { AgmCoreModule } from '@agm/core';
-import { Loader } from '@googlemaps/js-api-loader';
 
 import {
   NgxBootstrapIconsModule,
@@ -33,6 +32,9 @@ import {
   emojiAngry,
   allIcons,
 } from 'ngx-bootstrap-icons';
+import { SharedModule } from './shared/shared.module';
+import { MaterialModule } from '@blox/material';
+
 // Select some icons (use an object, not an array)
 const icons = {
   alarm,
@@ -49,7 +51,7 @@ const navList = R.concat(NAV_LIST, []);
   imports: [
     BrowserModule,
     MatNativeDateModule,
-
+    SharedModule,
     CoreModule.forRoot(navList),
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -66,10 +68,11 @@ const navList = R.concat(NAV_LIST, []);
     MatMenuModule,
     NgxSpinnerModule,
     NgxBootstrapIconsModule.pick(allIcons),
+    MaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  exports: [NgxBootstrapIconsModule],
+  exports: [NgxBootstrapIconsModule, MaterialModule],
 })
 export class AppModule {}
