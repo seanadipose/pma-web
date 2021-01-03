@@ -8,15 +8,20 @@ import { JournalCollectionService } from 'src/app/modules/collections/services/j
 @Component({
   selector: 'pma-journals-page',
   template: `
-    <div fxLayout="row wrap" fxLayoutAlign="space-evenly stretch" fxLayoutGap="15px" class="card-container">
-      <ng-container *ngIf="journals$ | async as journals">
-        <pma-journal-card *ngFor="let jrnl of journals" [journal]="jrnl"></pma-journal-card>
-      </ng-container>
-    </div>
+    <!-- <div fxLayout="row wrap" fxLayoutAlign="space-evenly stretch" fxLayoutGap="15px" class="card-container"> -->
+    <ng-container *ngIf="journals$ | async as journals">
+      <mat-grid-list [cols]="mapCols(journals.length)" colspan="1" gutterSize="15px">
+        <pma-journal-card mat-grid-tile *ngFor="let jrnl of journals" [journal]="jrnl"></pma-journal-card>
+      </mat-grid-list>
+    </ng-container>
+    <!-- </div> -->
   `,
   styleUrls: ['./journals-page.component.scss'],
 })
 export class JournalsPageComponent implements OnInit {
+  mapCols(num: number) {
+    num % 3;
+  }
   journals$: Observable<Journal[]>;
   constructor(private stateSvc: StateService, private journalSvc: JournalCollectionService) {}
 

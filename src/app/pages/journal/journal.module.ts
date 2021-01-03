@@ -14,6 +14,7 @@ import { CreateJournalPageComponent } from './views/create-journal-page/create-j
 import { JournalsPageComponent } from './views/journals-page/journals-page.component';
 import { JournalCardComponent } from './components/journal-card/journal-card.component';
 import { AgmCoreModule } from '@agm/core';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,14 @@ import { AgmCoreModule } from '@agm/core';
     JournalsPageComponent,
     JournalCardComponent,
   ],
-  imports: [CommonModule, JournalRoutingModule, SharedModule, FormsModule, MatMenuModule, AgmCoreModule],
+  imports: [
+    CommonModule,
+    JournalRoutingModule,
+    SharedModule,
+    FormsModule,
+    MatMenuModule,
+    AgmCoreModule,
+    MatGridListModule,
+  ],
 })
 export class JournalModule {}
