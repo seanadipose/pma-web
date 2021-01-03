@@ -8,7 +8,7 @@ import { JournalCollectionService } from 'src/app/modules/collections/services/j
 @Component({
   selector: 'pma-journals-page',
   template: `
-    <div fxLayout="row wrap" fxLayoutAlign="start stretch" fxLayoutGap="15px">
+    <div fxLayout="row wrap" fxLayoutAlign="space-evenly stretch" fxLayoutGap="15px" class="card-container">
       <ng-container *ngIf="journals$ | async as journals">
         <pma-journal-card *ngFor="let jrnl of journals" [journal]="jrnl"></pma-journal-card>
       </ng-container>

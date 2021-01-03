@@ -1,5 +1,5 @@
 import * as R from 'remeda';
-
+import firebase from 'firebase';
 export interface TimeStampType {
   nanoseconds: number;
   seconds: number;
@@ -11,7 +11,7 @@ export interface Journal {
   emotions?: string[];
   place: string;
   geoloc: string;
-  dateTime: Date;
+  dateTime: Date | firebase.firestore.Timestamp;
   rating: number;
   time: any;
   emotionsList?: string[];
