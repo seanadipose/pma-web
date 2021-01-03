@@ -1,18 +1,8 @@
 mat-card {
-  margin-bottom: 15px;
-  max-width: 400px;
-
-  mat-card-content {
+  max-width: 100%;
 
 
 
-
-  }
-
-  mat-card-footer {
-    height: 40px;
-    margin-right: 10px;
-  }
 }
 
 .feelings-list {
@@ -26,4 +16,19 @@ mat-card {
 agm-map {
   // width: calc(100% + 32px);
   height: 346px;
+}
+.icon {
+    font-size: 36px;
+}
+
+
+.happy {
+  color: #a0b59e
+}
+.neutral {
+  color: #b39eb5
+}
+
+.unhappy {
+  color: #FF9B9B
 }

@@ -26,9 +26,6 @@ import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
               <div>Card Content Here</div>
             </mat-card-content>
           </mat-card> -->
-          <div class="dashboard-card">
-            <ng-content select="grid-card"> </ng-content>
-          </div>
         </mat-grid-tile>
       </mat-grid-list>
     </div>

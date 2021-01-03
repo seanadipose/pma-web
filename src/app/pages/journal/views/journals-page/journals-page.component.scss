@@ -6,13 +6,17 @@
 }
 .dashboard-card {
   position: absolute;
-  top: 15px;
-  left: 15px;
-  right: 15px;
-  bottom: 15px;
+  top: 5px;
+  left: 0px;
+  right: 0px;
+  bottom: 5px;
 }
 
 
 .dashboard-card-content {
-  text-align: center;
+  text-align: left;
+}
+
+mat-grid-list {
+  margin: 15px;
 }

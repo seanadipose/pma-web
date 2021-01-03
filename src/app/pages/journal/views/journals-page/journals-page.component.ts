@@ -9,11 +9,13 @@ import { JournalCollectionService } from 'src/app/modules/collections/services/j
   selector: 'pma-journals-page',
   template: `
     <!-- <div fxLayout="row wrap" fxLayoutAlign="space-evenly stretch" fxLayoutGap="15px" class="card-container"> -->
-    <mat-grid-list cols="3" colspan="1" gutterSize="15px">
-      <mat-grid-tile *ngFor="let jrnl of journals$ | async" [colspan]="1" [rowspan]="1">
-        <pma-journal-card [journal]="jrnl" class="dashboard-card"></pma-journal-card>
-      </mat-grid-tile>
-    </mat-grid-list>
+    <ng-container *ngIf="journals$ | async as jrnls">
+      <mat-grid-list cols="3" gutterSize="15px" rowHeight="560px">
+        <mat-grid-tile [colspan]="1" [rowspan]="1" *ngFor="let jrnl of jrnls">
+          <pma-journal-card [journal]="jrnl" class="dashboard-card"></pma-journal-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </ng-container>
     <!-- </div> -->
   `,
   styleUrls: ['./journals-page.component.scss'],

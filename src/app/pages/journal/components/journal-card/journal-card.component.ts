@@ -20,15 +20,17 @@ const pickJournal = (jrnl: Journal) =>
   selector: 'pma-journal-card',
   template: `
     <mat-card>
-      <mat-card-title-group>
+      <mat-card-header>
+        <div mat-card-avatar class="icon">
+          <mat-icon [inline]="true" [color]="colorMap(rating)">{{ iconMap(rating) }}</mat-icon>
+        </div>
         <mat-card-title>
-          <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="start center">
-            <mat-icon [inline]="true" color="accent">{{ rating }}</mat-icon
-            ><span>{{ title }}</span>
+          <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="start center" [ngClass]="ratingClass">
+            <span>{{ title }}</span>
           </div></mat-card-title
         >
         <mat-card-subtitle>{{ subTitle }}</mat-card-subtitle>
-      </mat-card-title-group>
+      </mat-card-header>
 
       <div mat-card-image class="trigger-map">
         <agm-map [latitude]="lat" [longitude]="lng"></agm-map>
@@ -59,11 +61,19 @@ const pickJournal = (jrnl: Journal) =>
   preserveWhitespaces: false,
 })
 export class JournalCardComponent extends Card implements OnInit {
+  colorMap(rating: number) {
+    return rating > 3 ? 'success' : rating === 3 ? 'neutral' : 'unhappy';
+  }
+  iconMap(rating: number) {
+    return this.ratingsIcons[rating];
+  }
+  ratingClass: string[];
+
   ratings: string[];
   // fields: JournalKeysType[] = ['title', 'place', 'dateTime', 'time', 'emotionsList'];
   lat: number;
   lng: number;
-  rating: string;
+  rating: number;
   emotionsList: string[];
   ratingsIcons = [
     'sentiment_very_dissatisfied',
@@ -78,17 +88,8 @@ export class JournalCardComponent extends Card implements OnInit {
     const locTupleToLatLong = (locTuple: [number, number]) =>
       locTuple?.length > 0 ? { lat: locTuple[0], lng: locTuple[1] } : { lat: null, long: null };
 
-    const ratingsMap = (rating = 1) => {
-      const ratings = R.pipe(
-        R.range(1, rating),
-        R.map((num) => this.ratingsIcons[num])
-      );
-      return ratings;
-    };
-
     const { title = '', description = '', place = '', dateTime, time, id = '', rating, geoloc, emotionsList } = jrnl;
     const { lat, lng } = locTupleToLatLong(geoloc);
-    const ratings = ratingsMap(rating);
 
     Object.assign(this, {
       title,
@@ -99,7 +100,8 @@ export class JournalCardComponent extends Card implements OnInit {
       lat,
       lng,
       emotionsList: emotionsList.length > 0 ? emotionsList : ['meh..'],
-      rating: this.ratingsIcons[rating],
+      rating: rating,
+      ratingClass: [`mat-${this.colorMap(rating)}`],
     });
   }
 
