@@ -4,15 +4,17 @@ import { JournalCollectionService } from 'src/app/modules/collections/services/j
 @Component({
   selector: 'pma-journal',
   template: `
-    <mat-toolbar color="accent">
+    <mat-toolbar>
       <span>Journals</span>
       <div class="toolbar-spacer"></div>
       <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
         <mat-icon>menu</mat-icon>
       </button>
     </mat-toolbar>
+    <div fxLayout="row" fxFlexFill fxLayout="column" fxFlexFill>
+      <router-outlet></router-outlet>
+    </div>
 
-    <router-outlet></router-outlet>
     <mat-menu #menu="matMenu">
       <a mat-menu-item [routerLink]="['new']">
         <mat-icon>create</mat-icon>
@@ -28,7 +30,13 @@ import { JournalCollectionService } from 'src/app/modules/collections/services/j
       </button>
     </mat-menu>
   `,
-  styles: [],
+  styles: [
+    `
+      :host() {
+        height: 100%;
+      }
+    `,
+  ],
 })
 export class JournalComponent implements OnInit {
   items: any;

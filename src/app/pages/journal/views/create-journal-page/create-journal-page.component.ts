@@ -11,7 +11,13 @@ import { JournalForm } from '../../models/journal-form.model';
 @Component({
   selector: 'pma-create-journal-page',
 
-  template: ` <mat-card> <pma-create-journal-form [fg]="journalForm"></pma-create-journal-form> </mat-card>`,
+  template: `
+    <div style="height: 100%">
+      <div fxLayout="column" fxLayoutAlign="start stretch" fxFlex fxFlexFill>
+        <pma-create-journal-form [fg]="journalForm"></pma-create-journal-form>
+      </div>
+    </div>
+  `,
   styleUrls: ['./create-journal-page.component.scss'],
 })
 export class CreateJournalPageComponent implements OnInit {

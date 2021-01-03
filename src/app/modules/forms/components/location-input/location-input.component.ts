@@ -30,6 +30,7 @@ export class LocationInputComponent extends PmaInputComponent implements OnInit 
   ngOnInit(): void {
     const ctrl = this.control;
     ctrl.disable();
+    this.getLocation();
   }
 
   getLocation() {

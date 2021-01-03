@@ -12,7 +12,7 @@ import { LoadingService } from '../core/services/loading.service';
   selector: 'pma-navigation',
   template: `
     <ng-container *ngIf="isReady">
-      <!-- <mat-sidenav-container class="sidenav-container">
+      <mat-sidenav-container class="sidenav-container">
         <mat-sidenav
           #drawer
           class="sidenav"
@@ -21,7 +21,6 @@ import { LoadingService } from '../core/services/loading.service';
           [mode]="(isHandset$ | async) ? 'over' : 'side'"
           [opened]="(isHandset$ | async) === false"
         >
-          <mat-toolbar color="primary" class="menu-toolbar">Menu</mat-toolbar>
           <mat-nav-list fxLayout="column" fxLayoutGap="5px">
             <mat-list-item>
               <button mat-raised-button fxFlexFill mat-line color="primary" routerLink="journals/new">
@@ -42,10 +41,11 @@ import { LoadingService } from '../core/services/loading.service';
               }}</a>
               <mat-icon mat-list-icon [class.active]="rla.isActive"> {{ listItem.icon }}</mat-icon>
             </mat-list-item>
+            <!-- <a mat-list-item href="#">Link 3</a> -->
           </mat-nav-list>
         </mat-sidenav>
         <mat-sidenav-content>
-          <mat-toolbar color="primary">
+          <mat-toolbar color="dark" class="mat-dark">
             <button
               type="button"
               aria-label="Toggle sidenav"
@@ -60,9 +60,10 @@ import { LoadingService } from '../core/services/loading.service';
             <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
               <mat-icon>face</mat-icon>
             </button>
-          </mat-toolbar> -->
-      <!-- Add Content Here -->
-      <!-- </mat-sidenav-content>
+          </mat-toolbar>
+          <!-- Add Content Here -->
+          <ng-content></ng-content>
+        </mat-sidenav-content>
       </mat-sidenav-container>
 
       <mat-menu #menu="matMenu">
@@ -79,28 +80,6 @@ import { LoadingService } from '../core/services/loading.service';
           <span>Disable alerts</span>
         </button>
       </mat-menu>
-    </ng-container> -->
-
-      <div class="blox-snippet-page">
-        <header mdcTopAppBar="fixed" [fixedAdjust]="fixedAdjust">
-          <div mdcTopAppBarRow>
-            <section mdcTopAppBarSection alignStart>
-              <!-- <a href="javascript:void(0)" mdcTopAppBarNavIcon mdcIconButton class="material-icons">menu</a> -->
-              <span mdcTopAppBarTitle>PMA</span>
-            </section>
-            <section mdcTopAppBarSection alignEnd>
-              <button mdcTopAppBarAction mdcIconButton class="material-icons" label="Download">file_download</button>
-              <button mdcTopAppBarAction mdcIconButton class="material-icons" label="Print this page">print</button>
-              <button mdcTopAppBarAction mdcIconButton class="material-icons" label="Bookmark this page">
-                more_vert
-              </button>
-            </section>
-          </div>
-        </header>
-        <main #fixedAdjust>
-          <ng-content></ng-content>
-        </main>
-      </div>
     </ng-container>
   `,
   styleUrls: ['./navigation.component.scss'],

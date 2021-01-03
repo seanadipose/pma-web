@@ -1,15 +1,16 @@
 
 
 // @use './styles/body';
-// @use "@material/theme" with (
-//   $primary: #99fbff;
-//   $secondary: #64ff74;
-//   $on-primary: #000000;
-//   $on-secondary: #000000;
-//   $background: #99fbff;
-//   $surface: #65c8cc;
-//   $on-surface: #616161;
-// // );
+@use "@material/theme" with (
+  $primary: #99fbff,
+  $secondary: #64ff74,
+  $on-primary: #000000,
+  $on-secondary: #000000,
+  $background: #99fbff,
+  $surface: lighten(#212121, 5%),
+  $on-surface: #616161
+);
+// );
 
 // @use "@material/typography" with (
 //   $styles-headline1: (
@@ -44,7 +45,11 @@
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
+// @use "@material/typography/mdc-typography";
 
+// @use "@material/typography" with (
+//   $font-family: unquote("Text Me One, Helvetica, sans-serif")
+// );
 
 /* You can add global styles to this file, and also import other style files */
 
@@ -74,16 +79,17 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 @import 'https://fonts.googleapis.com/css?family=Material+Icons+Two+Tone';
 @import url('https://fonts.googleapis.com/css?family=Text+Me+One:300,400,500');
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
-$mdc-typography-font-family: unquote("Text Me One, Helvetica, sans-serif");
+// $mdc-typography-font-family: unquote("Text Me One, Helvetica, sans-serif");
 
-$mdc-theme-primary: #99fbff;
-$mdc-theme-on-primary: #64ff74;
-$mdc-theme-secondary: #000000;
-$mdc-theme-on-secondary: #000000;
-$mdc-theme-surface: #99fbff;
-$mdc-theme-on-surface: #65c8cc;
-$mdc-theme-background: #707070;
-$mdc-theme-on-background: #212121;
+// $mdc-theme-primary: #99fbff;
+// $mdc-theme-on-primary: #64ff74;
+// $mdc-theme-secondary: #000000;
+// $mdc-theme-on-secondary: #000000;
+// $mdc-theme-surface: #99fbff;
+// $mdc-theme-on-surface: #65c8cc;
+// $mdc-theme-background: #707070;
+// $mdc-theme-on-background: #212121;
+// $mdc-typography-font-family: unquote("Text me One, Helvetica, sans-serif");
 @import "material-components-web/material-components-web";
 
 $fontConfig: (
@@ -97,10 +103,41 @@ $fontConfig: (
   subheading-1: mat-typography-level(15px, 24px, 500, 'Text Me One', 0.0067em),
   body-2: mat-typography-level(14px, 24px, 500, 'Roboto', 0.0179em),
   body-1: mat-typography-level(14px, 20px, 400, 'Roboto', 0.0179em),
-  button: mat-typography-level(14px, 14px, 500, 'Text Me One', 0.0893em),
+  button: mat-typography-level(14px, 14px, 500, 'Roboto', 0.1293em),
   caption: mat-typography-level(12px, 20px, 400, 'Text Me One', 0.0333em),
   input: mat-typography-level(inherit, 1.125, 400, 'Roboto', 1.5px)
 );
+
+.mat-success {
+  color: #a0b59e !important;
+}
+
+.mat-neutral {
+  color: #b3b3c2 !important;
+}
+
+.mat-unhappy {
+  color: #FF9B9B
+}
+.mat-dark {
+  background-color: #212121;
+ color: #e8e2e9;
+
+}
+
+.accent-text {
+ color: #e8e2e9;
+}
+
+.primary-text {
+  color:#b3b3c2;
+}
+.variant-text {
+  color:#FF9B9B;
+
+}
+
+$variantb-color: #a0b59e;
 
 // Foreground Elements
 
@@ -381,3 +418,9 @@ $altTheme: mat-light-theme($theme-primary, $theme-accent, $theme-warn);
 .light-bg {
   background-color: $light-bg-alpha-4
 }
+// .mat-horizontal-content-container {
+//   height: 100% !important;
+// }
+// .mat-horizontal-stepper-content {
+//   height: 80% !important;
+// }

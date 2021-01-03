@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'pma-btn-cntr',
   template: `
-    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="15px" class="button-container">
+    <div fxLayout="row-reverse" fxLayoutAlign="start start" fxLayoutGap="15px" class="button-container">
       <ng-content></ng-content>
     </div>
   `,

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCardModule } from '@angular/material/card';
@@ -14,6 +14,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatMenuModule } from '@angular/material/menu';
 import { LayoutModule } from '@angular/cdk/layout';
 import { HoverDirective } from './directives/hover.directive';
+import { FormCardComponent } from './components/form-card/form-card.component';
+import { MaterialModule } from '@blox/material';
 
 const MAT_MODULES = [
   FlexLayoutModule,
@@ -30,8 +32,16 @@ const MAT_MODULES = [
 const directives = [HoverDirective];
 
 @NgModule({
-  declarations: [ButtonContainerComponent, DashboardComponent, HoverDirective],
+  declarations: [ButtonContainerComponent, DashboardComponent, HoverDirective, FormCardComponent],
   imports: [CommonModule, ...MAT_MODULES, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule, LayoutModule],
-  exports: [FlexLayoutModule, ...MAT_MODULES, ButtonContainerComponent, DashboardComponent, HoverDirective],
+  exports: [
+    FlexLayoutModule,
+    ...MAT_MODULES,
+    ButtonContainerComponent,
+    DashboardComponent,
+    HoverDirective,
+    FormCardComponent,
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class SharedModule {}

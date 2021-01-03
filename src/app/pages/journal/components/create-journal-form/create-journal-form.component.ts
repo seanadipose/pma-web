@@ -1,6 +1,5 @@
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import { Component, EventEmitter, InjectionToken, Input, OnInit, Output } from '@angular/core';
-import { MatChipsDefaultOptions } from '@angular/material/chips';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Journal } from 'src/app/core/models/journal.model';
@@ -8,101 +7,146 @@ import { LoadingService } from 'src/app/core/services/loading.service';
 import { StateService } from 'src/app/core/services/state-service';
 import { JournalCollectionService } from 'src/app/modules/collections/services/journal-collections.service';
 import { JournalForm } from '../../models/journal-form.model';
-import { JournalFormComponent } from '../journal-form/journal-form.component';
 
 @Component({
   selector: 'pma-create-journal-form',
   template: `
-    <mat-horizontal-stepper
-      #stepper
-      (selectionChange)="onChange($event)"
-      [selectedIndex]="selectedIndex"
-      color="success"
-    >
-      <form [formGroup]="fg">
-        <mat-step [hasError]="selectedIndex > 0 && emotionCloud.selectedOptions.length < 1" style="height: 100%;">
-          <ng-template matStepLabel>How bad is it?</ng-template>
-          <!-- <mat-form-field> -->
-          <div
-            fxLayout="column"
-            fxLayoutAlign="space-around center"
-            fxLayoutGap="30px"
-            class="step-container"
-            fxFlexFill
-          >
-            <mat-label>How's your mood?</mat-label>
-            <pma-icon-picker-input #moodScale="iconInput" [(rating)]="rating"></pma-icon-picker-input>
-            <pma-autocomplete-input
-              name="emotions"
-              label="Describe feelings"
-              style="margin-top: 15px;"
-              [options]="emotionOptions | async"
-              #emotionCloud="autoInput"
-              appearance="fill"
-            ></pma-autocomplete-input>
-            <mat-chip-list #chipList aria-label="Fruit selection">
-              <mat-chip
-                *ngFor="let option of emotionCloud.selectedOptions; index as i"
-                [selectable]="false"
-                [removable]="true"
-                (removed)="emotionCloud.removeSelection(i)"
-                defaultColor="accent"
-                color="primary"
-              >
-                {{ option }}
-                <mat-icon matChipRemove color="primary">cancel</mat-icon>
-              </mat-chip>
-            </mat-chip-list>
-          </div>
-          <!-- </mat-form-field> -->
-          <pma-btn-cntr>
-            <button
-              mat-raised-button
-              matStepperNext
-              [disabled]="emotionCloud.selectedOptions.length < 1"
-              color="accent"
-            >
-              Next
-            </button>
-          </pma-btn-cntr>
-        </mat-step>
-        <mat-step [hasError]="stepTwoInvalid" errorMessage="must fill out all fields">
-          <ng-template matStepLabel>When and where</ng-template>
-          <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" class="step-container" fxFlexFill>
-            <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="15px" fxFlexFill>
-              <pma-date-input name="dateTime" label="When it started" fxFlex="50"></pma-date-input>
-              <pma-input type="time" name="time" label="Time of day" fxFlex="50"></pma-input>
-            </div>
-            <pma-location-input name="geoloc" label="location" fxFlexFill></pma-location-input>
-            <pma-select-input name="place" label="Place" fxFlexFill [options]="placeOptions | async"></pma-select-input>
-          </div>
-          <pma-btn-cntr>
-            <button mat-button matStepperPrevious>Back</button>
+    <div fxLayout="column" fxLayoutAlign="center center" fxFlex fxFlexFill>
+      <div mdcCard>
+        <mat-horizontal-stepper
+          #stepper
+          (selectionChange)="onChange($event)"
+          [selectedIndex]="selectedIndex"
+          color="success"
+          style="height: 100%;"
+        >
+          <div class="step-container">
+            <form [formGroup]="fg">
+              <mat-step [hasError]="selectedIndex > 0 && emotionCloud.selectedOptions.length < 1" style="height: 100%">
+                <ng-template matStepLabel>How bad is it?</ng-template>
+                <!-- <mat-form-field> -->
+                <div
+                  fxLayout="column"
+                  fxLayoutAlign="space-around center"
+                  fxLayoutGap="30px"
+                  class="step-container"
+                  fxFlexFill
+                >
+                  <div fxLayout="row" fxLayoutAlign="space-between stretch" fxLayoutGap="5px" fxFlexFill>
+                    <pma-date-input name="dateTime" label="When it started" fxFlex fxFlexFill></pma-date-input>
+                    <pma-input type="time" name="time" label="Time of day" fxFlex fxFlexFill></pma-input>
+                  </div>
+                  <pma-input name="title" label="Trigger" style="width:100%"></pma-input>
+                  <pma-autocomplete-input
+                    name="emotions"
+                    label="Describe feelings"
+                    style="margin-top: 15px;"
+                    [options]="emotionOptions | async"
+                    #emotionCloud="autoInput"
+                    appearance="outline"
+                    style="width:100%"
+                  ></pma-autocomplete-input>
+                  <mat-chip-list #chipList aria-label="Fruit selection">
+                    <mat-chip
+                      *ngFor="let option of emotionCloud.selectedOptions; index as i"
+                      [selectable]="false"
+                      [removable]="true"
+                      (removed)="emotionCloud.removeSelection(i)"
+                      defaultColor="accent"
+                      color="primary"
+                    >
+                      {{ option }}
+                      <mat-icon matChipRemove color="primary">cancel</mat-icon>
+                    </mat-chip>
+                  </mat-chip-list>
+                  <pma-icon-picker-input #moodScale="iconInput" [(rating)]="rating"></pma-icon-picker-input>
+                  <button
+                    mat-raised-button
+                    matStepperNext
+                    [disabled]="emotionCloud.selectedOptions.length < 1 && fg.get('title').valid"
+                    color="accent"
+                  >
+                    Next
+                  </button>
+                </div>
+              </mat-step>
+              <mat-step [hasError]="stepTwoValid" errorMessage="must fill out all fields">
+                <ng-template matStepLabel>When and where</ng-template>
+                <div
+                  fxLayout="column"
+                  fxLayoutAlign="space-around stretch"
+                  fxLayoutGap="30px"
+                  class="step-container"
+                  fxFlexFill
+                >
+                  <!-- <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="15px" fxFlexFill> -->
 
-            <button mat-raised-button matStepperNext [disabled]="stepTwoInvalid" color="accent">Next</button>
-          </pma-btn-cntr>
-        </mat-step>
-        <mat-step [hasError]="selectedIndex === 2 && fg.invalid">
-          <ng-template matStepLabel>What happened</ng-template>
-          <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="15ppx" class="step-container">
-            <pma-input name="title" label="title" fxFlexFill></pma-input>
+                  <!-- </div> -->
+                  <div fxLayout="row" fxLayoutAlign="space-between stretch" fxLayoutGap="5px" fxFlexFill>
+                    <pma-select-input
+                      name="place"
+                      label="Place"
+                      [options]="placeOptions | async"
+                      fxFlex
+                      fxFlexFill
+                    ></pma-select-input>
 
-            <pma-textbox-input name="description" label="description" fxFlexFill></pma-textbox-input>
+                    <pma-location-input
+                      name="geoloc"
+                      label="location"
+                      #loc="locationInput"
+                      fxFlex
+                      fxFlexFill
+                    ></pma-location-input>
+                  </div>
+                  <agm-map
+                    *ngIf="loc.lat && loc.lat"
+                    [latitude]="loc.lat"
+                    [longitude]="loc.lng"
+                    [zoom]="16"
+                    [disableDefaultUI]="true"
+                  >
+                    <agm-marker [latitude]="loc.lat" [longitude]="loc.lng"></agm-marker>
+                  </agm-map>
+
+                  <!-- <pma-btn-cntr> -->
+                  <div fxLayout="row" fxLayoutAlign="center center">
+                    <button mat-button matStepperPrevious>Back</button>
+
+                    <button
+                      mat-raised-button
+                      matStepperNext
+                      [disabled]="stepTwoValid"
+                      mat-raised-button
+                      color="primary"
+                      (click)="submit(fg.getRawValue(), emotionCloud.selectedOptions, moodScale.rating)"
+                    >
+                      Next
+                    </button>
+                  </div>
+                  <!-- </pma-btn-cntr> -->
+                </div>
+              </mat-step>
+              <!-- <mat-step [hasError]="selectedIndex === 2 && fg.invalid">
+                <ng-template matStepLabel>What happened</ng-template>
+
+                <pma-btn-cntr>
+                  <button mat-button matStepperPrevious>Back</button>
+                  <button
+                    mat-raised-button
+                    matStepperNext
+                    color="primary"
+                    (click)="submit(fg.getRawValue(), emotionCloud.selectedOptions, moodScale.rating)"
+                  >
+                    Submit
+                  </button>
+                </pma-btn-cntr>
+              </mat-step> -->
+            </form>
           </div>
-          <pma-btn-cntr>
-            <button mat-button matStepperPrevious>Back</button>
-            <button
-              mat-raised-button
-              matStepperNext
-              color="primary"
-              (click)="submit(fg.getRawValue(), emotionCloud.selectedOptions, moodScale.rating)"
-            >
-              Submit
-            </button>
-          </pma-btn-cntr>
-        </mat-step>
-      </form>
-    </mat-horizontal-stepper>
+        </mat-horizontal-stepper>
+      </div>
+    </div>
   `,
   styleUrls: ['./create-journal-form.component.scss'],
   providers: [
@@ -124,7 +168,7 @@ export class CreateJournalFormComponent implements OnInit {
     return new Array(Math.round(num));
   }
 
-  get stepTwoInvalid() {
+  get stepTwoValid() {
     if (this.selectedIndex === 0) return false;
     const { dateTime, time, place } = this.fg.controls;
 

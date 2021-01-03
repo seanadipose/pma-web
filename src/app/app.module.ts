@@ -34,6 +34,7 @@ import {
 } from 'ngx-bootstrap-icons';
 import { SharedModule } from './shared/shared.module';
 import { MaterialModule } from '@blox/material';
+import { CommonModule } from '@angular/common';
 
 // Select some icons (use an object, not an array)
 const icons = {
@@ -50,6 +51,7 @@ const navList = R.concat(NAV_LIST, []);
   declarations: [AppComponent, NavigationComponent],
   imports: [
     BrowserModule,
+    CommonModule,
     MatNativeDateModule,
     SharedModule,
     CoreModule.forRoot(navList),
