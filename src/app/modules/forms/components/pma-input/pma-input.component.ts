@@ -17,6 +17,7 @@ import { humanizePipe } from 'src/app/core/functions/humanize.function';
 })
 export class PmaInputComponent implements OnInit {
   @Input() type: 'time' | 'text' = 'text';
+  @Input() placeholder: string;
 
   @Input() name: string;
   label: string;

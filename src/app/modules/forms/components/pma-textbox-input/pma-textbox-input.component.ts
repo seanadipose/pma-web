@@ -7,7 +7,13 @@ import { PmaInputComponent } from '../pma-input/pma-input.component';
   template: `
     <mat-form-field [formGroup]="form.control" [appearance]="appearance" fxFlexFill>
       <mat-label> {{ label }} </mat-label>
-      <textarea matInput #inputField="matInput" [formControlName]="name" type="text" placeholder="label"></textarea>
+      <textarea
+        matInput
+        #inputField="matInput"
+        [formControlName]="name"
+        type="text"
+        [placeholder]="placeholder"
+      ></textarea>
       <mat-error>{{ form.control.get(name)['errorMessage'] }}</mat-error>
     </mat-form-field>
   `,
