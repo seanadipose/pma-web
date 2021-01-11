@@ -1,5 +1,5 @@
 export const VALIDATION_MESSAGES = {
-  required: `{{1}} is required.`,
+  required: `is required.`,
   // sin: `Invalid SIN`,
   // alpha: 'Only alphabelts are allowed.',
   // alphaNumeric: 'Only alphabet and numbers are allowed.',

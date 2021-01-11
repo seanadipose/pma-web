@@ -5,7 +5,7 @@ import { JournalCollectionService } from 'src/app/modules/collections/services/j
   selector: 'pma-journal',
   template: `
     <mat-toolbar color="accent">
-      <span>Journals</span>
+      <span>My Triggers</span>
       <div class="toolbar-spacer"></div>
       <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
         <mat-icon>menu</mat-icon>

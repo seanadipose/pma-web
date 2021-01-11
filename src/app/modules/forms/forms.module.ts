@@ -28,7 +28,6 @@ import { IconPickerInputComponent } from './components/icon-picker-input/icon-pi
 import { IconButtonDirective } from './directives/icon-button.directive';
 import { NgxBootstrapIconsModule } from 'ngx-bootstrap-icons';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { BaseFormComponent } from './components/base-form/base-form.component';
 
 const MAT_MODULES = [
   MatFormFieldModule,
@@ -39,47 +38,33 @@ const MAT_MODULES = [
   MatSelectModule,
   MatSliderModule,
   MatAutocompleteModule,
+  MatNativeDateModule,
+  ReactiveFormsModule,
+  RxReactiveFormsModule,
+  MatIconModule,
+  MatButtonModule,
+  NgxBootstrapIconsModule,
+  FlexLayoutModule,
 ];
 const validations = clone(VALIDATION_MESSAGES);
 
-const components = [PmaInputComponent, AutocompleteInputComponent];
+const components = [
+  PmaInputComponent,
+  AutocompleteInputComponent,
+
+  PasswordInputComponent,
+  DateInputComponent,
+  PmaTextboxInputComponent,
+  LocationInputComponent,
+  SelectInputComponent,
+  IconPickerInputComponent,
+];
+const directives = [IconButtonDirective];
 
 @NgModule({
-  declarations: [
-    ...components,
-    PasswordInputComponent,
-    DateInputComponent,
-    PmaTextboxInputComponent,
-    LocationInputComponent,
-    SelectInputComponent,
-    IconPickerInputComponent,
-    IconButtonDirective,
-    BaseFormComponent,
-  ],
-  imports: [
-    CommonModule,
-    MatNativeDateModule,
-    ReactiveFormsModule,
-    RxReactiveFormsModule,
-    ...MAT_MODULES,
-    MatIconModule,
-    MatButtonModule,
-    NgxBootstrapIconsModule,
-    FlexLayoutModule,
-  ],
-  exports: [
-    ReactiveFormsModule,
-    RxReactiveFormsModule,
-    ...MAT_MODULES,
-    ...components,
-    PasswordInputComponent,
-    DateInputComponent,
-    PmaTextboxInputComponent,
-    LocationInputComponent,
-    SelectInputComponent,
-    IconPickerInputComponent,
-    BaseFormComponent,
-  ],
+  declarations: [...components, ...directives],
+  imports: [CommonModule, ...MAT_MODULES],
+  exports: [...MAT_MODULES, ...components],
   providers: [{ provide: PMA_VALIDATION_MESSAGES, useValue: validations }, PmaFormsService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

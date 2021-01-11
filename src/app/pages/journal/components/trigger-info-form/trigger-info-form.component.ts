@@ -7,7 +7,7 @@ import { BaseFormComponent } from 'src/app/modules/forms/components/base-form/ba
   selector: 'pma-trigger-info-form',
   template: `
     <form [formGroup]="fg">
-      <div fxLayout="column" fxLayoutAlign="strat start" fxLayoutGap="15px">
+      <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="15px">
         <pma-input name="title" label="title"> </pma-input>
 
         <pma-textbox-input name="description" label="...lorem ipsum"></pma-textbox-input>

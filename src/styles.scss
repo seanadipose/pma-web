@@ -418,9 +418,7 @@ $altTheme: mat-light-theme($theme-primary, $theme-accent, $theme-warn);
 .light-bg {
   background-color: $light-bg-alpha-4
 }
-// .mat-horizontal-content-container {
-//   height: 100% !important;
-// }
-// .mat-horizontal-stepper-content {
-//   height: 80% !important;
-// }
+
+mat-toolbar span {
+  font-weight: 1000;
+}
