@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IFormGroup } from '@rxweb/reactive-form-validators';
 import { TriggerInfo } from 'src/app/core/models/trigger-info.model';
+import { BaseFormComponent } from 'src/app/modules/forms/components/base-form/base-form.component';
 
 @Component({
   selector: 'pma-trigger-info-form',
@@ -24,10 +25,11 @@ import { TriggerInfo } from 'src/app/core/models/trigger-info.model';
   `,
   styleUrls: ['./trigger-info-form.component.scss'],
 })
-export class TriggerInfoFormComponent implements OnInit {
-  @Input() fg: IFormGroup<TriggerInfo>;
+export class TriggerInfoFormComponent extends BaseFormComponent<TriggerInfoFormComponent> implements OnInit {
   @Input() position: { lat: number; lng: number };
-  constructor() {}
+  constructor() {
+    super();
+  }
 
   ngOnInit(): void {}
 }

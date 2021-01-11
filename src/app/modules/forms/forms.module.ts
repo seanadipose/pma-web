@@ -28,6 +28,7 @@ import { IconPickerInputComponent } from './components/icon-picker-input/icon-pi
 import { IconButtonDirective } from './directives/icon-button.directive';
 import { NgxBootstrapIconsModule } from 'ngx-bootstrap-icons';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { BaseFormComponent } from './components/base-form/base-form.component';
 
 const MAT_MODULES = [
   MatFormFieldModule,
@@ -53,6 +54,7 @@ const components = [PmaInputComponent, AutocompleteInputComponent];
     SelectInputComponent,
     IconPickerInputComponent,
     IconButtonDirective,
+    BaseFormComponent,
   ],
   imports: [
     CommonModule,
@@ -76,6 +78,7 @@ const components = [PmaInputComponent, AutocompleteInputComponent];
     LocationInputComponent,
     SelectInputComponent,
     IconPickerInputComponent,
+    BaseFormComponent,
   ],
   providers: [{ provide: PMA_VALIDATION_MESSAGES, useValue: validations }, PmaFormsService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
