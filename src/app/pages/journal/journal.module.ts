@@ -17,6 +17,11 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from '@blox/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { TriggerInfoFormComponent } from './components/trigger-info-form/trigger-info-form.component';
+import { FeelingFormComponent } from './components/feeling-form/feeling-form.component';
+import { HearingFormComponent } from './components/hearing-form/hearing-form.component';
+import { TouchingFormComponent } from './components/touching-form/touching-form.component';
+import { SeeingFormComponent } from './components/seeing-form/seeing-form.component';
 @NgModule({
   declarations: [
     JournalComponent,
@@ -26,6 +31,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     CreateJournalPageComponent,
     JournalsPageComponent,
     JournalCardComponent,
+    TriggerInfoFormComponent,
+    FeelingFormComponent,
+    HearingFormComponent,
+    TouchingFormComponent,
+    SeeingFormComponent,
   ],
   imports: [
     CommonModule,
