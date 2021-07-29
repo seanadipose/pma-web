@@ -73,7 +73,7 @@ export class LoginPageComponent implements OnInit {
     try {
       await this.authSvc.login(user, pw).toPromise();
     } catch (err) {
-      const errorRef = this.errorSvc.log(LogLevels.WARN, { message: err.message });
+      const errorRef = this.errorSvc.log('warn', { message: err.message });
       errorRef.pipe(take(1)).subscribe((res) => (this.errorState = null));
       this.fg.get('password').reset();
 

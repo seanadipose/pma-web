@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule, routes } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavigationComponent } from './navigation/navigation.component';
@@ -71,7 +71,7 @@ const navList = R.concat(NAV_LIST, []);
     NgxBootstrapIconsModule.pick(allIcons),
     MaterialModule,
   ],
-  providers: [],
+  providers: [{provide: 'Routelist', useValue: routes.map(route => route.path.toLowerCase())}],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [NgxBootstrapIconsModule, MaterialModule],

@@ -10,14 +10,12 @@ import { StateService } from './core/services/state-service';
   selector: 'pma-root',
   template: `
     <!--The content below is only a placeholder and can be replaced.-->
-        <router-outlet name="missing"></router-outlet>
 
-	<a [routerLink]="[{ outlets: { 'missing': ['missing'] } }]">Component Aux</a>
-
-    <!-- <pma-navigation > -->
+    <pma-navigation >
 
       <router-outlet></router-outlet>
-    <!-- </pma-navigation> -->
+
+    </pma-navigation>
 
     <ngx-spinner></ngx-spinner>
   `,
@@ -48,7 +46,6 @@ export class AppComponent implements OnInit {
     //   this.isReady = !!res;
     // });
     this.userId$ = userId;
-    // this.router.navigate([{ outlets: { outletName: ['notFound'] } }]);
 
   }
 }

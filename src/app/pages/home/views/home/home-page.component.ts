@@ -42,9 +42,9 @@ export class HomePageComponent implements OnInit {
   async updateUser(user: UserForm) {
     try {
       const res = await this.authSvc.updateUser(user);
-      this.errorSvc.log(LogLevels.DEBUG, { message: 'Changes saved sucessfully' });
+      this.errorSvc.log('debug', { message: 'Changes saved sucessfully' });
     } catch (err) {
-      const errorRef = this.errorSvc.log(LogLevels.WARN, { message: err.message });
+      const errorRef = this.errorSvc.log('warn', { message: err.message });
       errorRef.pipe(take(1)).subscribe((res) => (this.errorState = null));
 
       this.errorState = err.message;

@@ -39,7 +39,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         const url = request.url.split('api')[1];
         // Not includes in array of urls then show pop up
         if (!['/user', '/applicationsettings'].includes(url.toLowerCase())) {
-          this.errorSvc.log(LogLevels.ERROR, { message: error.message });
+          this.errorSvc.log('error', { message: error.message });
         }
         // this.modalSvc.openCustomDialog(dialogComponent, params);
         return throwError(error);

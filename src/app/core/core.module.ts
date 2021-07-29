@@ -1,5 +1,5 @@
-import { NgModule, Optional, SkipSelf } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { inject, InjectionToken, NgModule, Optional, SkipSelf } from '@angular/core';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import { ModuleWithProviders } from '@angular/compiler/src/core';
 import { PMA_NAV_LIST } from './tokens/navlist.token';
 import { NavlistItem } from './models/navlist-item.model';
@@ -25,7 +25,12 @@ import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 
 const userFields = R.concat(USER_FIELDS);
 const config = snackBarConfig.defaults;
-
+export const WINDOW = new InjectionToken<Window>(
+  'An abstraction over global window object',
+  {
+    factory: () => inject(DOCUMENT).defaultView!
+  },
+);
 @NgModule({
   declarations: [],
   imports: [
@@ -56,6 +61,7 @@ export class CoreModule {
         { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
         { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: config },
         { provide: USER_FIELDS_TOKEN, useValue: userFields },
+        {provide: WINDOW},
 
         AngularFireAuth,
         AuthService,
