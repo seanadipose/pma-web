@@ -14,10 +14,10 @@
 
 // @use "@material/typography" with (
 //   $styles-headline1: (
-//     $font-family: unquote("Arial, Helvetica, sans-serif")
+//     $font-family: unquote("Text Me One, Helvetica, sans-serif")
 //   ),
 //   $styles-headline2: (
-//     $font-family: unquote("Arial, Helvetica, sans-serif"),
+//     $font-family: unquote("Text Me One, Helvetica, sans-serif"),
 //     $font-size: 3.25rem
 //   ),
 //    $styles-headline3: (
@@ -421,4 +421,12 @@ $altTheme: mat-light-theme($theme-primary, $theme-accent, $theme-warn);
 
 mat-toolbar span {
   font-weight: 1000;
+}
+
+.mat-drawer-content {
+  overflow: hidden !important;
+}
+.mat-drawer-inner-container {
+  overflow: hidden !important;
+
 }

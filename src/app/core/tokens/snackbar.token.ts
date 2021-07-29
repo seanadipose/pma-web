@@ -7,3 +7,8 @@ defaults.duration = environment.timeout;
 defaults.announcementMessage = 'Announcement';
 
 export const snackBarConfig = { defaults };
+
+
+const test = [ defaults, defaults ] as const;
+
+// test.map(itm => itm.)

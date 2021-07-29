@@ -5,26 +5,53 @@ import { JournalCollectionService } from 'src/app/modules/collections/services/j
 import { PmaFormsService } from 'src/app/modules/forms/services/pma-forms.service';
 import { JournalForm } from '../../models/journal-form.model';
 import { forms as triggerForms } from '../../forms/trigger-form.model';
+import { CdkStepper } from '@angular/cdk/stepper';
 
 @Component({
   selector: 'pma-create-journal-page',
 
   template: `
-    <div style="height: 100%">
-      <!-- <div fxLayout="column" fxLayoutAlign="start stretch" fxFlex fxFlexFill> -->
-      <!-- <pma-create-journal-form [fg]="forms.triggerInfoForm" [position]="position"></pma-create-journal-form> -->
-      <pma-trigger-info-form [fg]="forms.triggerInfoForm"></pma-trigger-info-form>
+    <nav mdcTabBar>
+      <div mdcTabScroller>
+        <div mdcTabScrollerArea>
+          <div mdcTabScrollerContent>
+            <a *ngFor="let tab of tabs; let i = index" mdcTab (activate)="activate(i)" tabindex="0">
+              <span mdcTabContent>
+                <span mdcTabLabel>{{ tab.name }}</span>
+              </span>
+              <span mdcTabIndicator>
+                <span mdcTabIndicatorContent></span>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
 
-      <pma-feeling-form [fg]="forms.feelingForm"></pma-feeling-form>
-      <pma-seeing-form [fg]="forms.seeingForm"></pma-seeing-form>
-      <pma-hearing-form [fg]="forms.hearingForm"></pma-hearing-form>
-      <pma-touching-form [fg]="forms.touchingForm"></pma-touching-form>
-      <!-- </div> -->
-    </div>
+    <!-- <div fxLayout="column" fxLayoutAlign="start stretch" fxFlex fxFlexFill> -->
+    <!-- <pma-create-journal-form [fg]="forms.triggerInfoForm" [position]="position"></pma-create-journal-form> -->
+    <pma-trigger-info-form [fg]="forms.triggerInfoForm"></pma-trigger-info-form>
+
+    <pma-feeling-form [fg]="forms.feelingForm"></pma-feeling-form>
+    <pma-seeing-form [fg]="forms.seeingForm"></pma-seeing-form>
+    <pma-hearing-form [fg]="forms.hearingForm"></pma-hearing-form>
+    <pma-touching-form [fg]="forms.touchingForm"></pma-touching-form>
+    <!-- </div> -->
   `,
   styleUrls: ['./create-journal-page.component.scss'],
 })
 export class CreateJournalPageComponent implements OnInit {
+  selectedIndex = 0;
+  tabs = [
+    { name: 'Trigger', content: 'blah blah blah' },
+    { name: 'Feelings', content: 'blah blah blah' },
+  ];
+  active = 0;
+
+  activate(index: number) {
+    this.active = index;
+  }
+
   forms: ReturnType<triggerForms['getForms']>;
   position: { lat: number; lng: number };
   constructor(

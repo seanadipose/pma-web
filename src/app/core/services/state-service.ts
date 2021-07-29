@@ -28,7 +28,7 @@ export class StateService {
   }
 
   private setUser(user: Partial<firebase.UserInfo> = { email: null }) {
-    const { email = null } = user;
+    const { email = null } = user || {};
 
     return email;
   }

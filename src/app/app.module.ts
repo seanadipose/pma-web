@@ -57,7 +57,6 @@ const navList = R.concat(NAV_LIST, []);
     CoreModule.forRoot(navList),
     AppRoutingModule,
     BrowserAnimationsModule,
-    LayoutModule,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,

@@ -16,6 +16,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { HoverDirective } from './directives/hover.directive';
 import { FormCardComponent } from './components/form-card/form-card.component';
 import { MaterialModule } from '@blox/material';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 const MAT_MODULES = [
   FlexLayoutModule,
@@ -32,7 +33,7 @@ const MAT_MODULES = [
 const directives = [HoverDirective];
 
 @NgModule({
-  declarations: [ButtonContainerComponent, DashboardComponent, HoverDirective, FormCardComponent],
+  declarations: [ButtonContainerComponent, DashboardComponent, HoverDirective, FormCardComponent, NotFoundComponent],
   imports: [CommonModule, ...MAT_MODULES, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule, LayoutModule],
   exports: [
     FlexLayoutModule,
@@ -41,6 +42,7 @@ const directives = [HoverDirective];
     DashboardComponent,
     HoverDirective,
     FormCardComponent,
+    NotFoundComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
